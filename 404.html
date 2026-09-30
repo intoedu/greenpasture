@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>페이지를 찾을 수 없습니다 | 그린파스처</title>
+<meta name="theme-color" content="#080d1b">
+<style>
+  /* 어느 주소에서 열려도 깨지지 않도록 필요한 스타일을 이 파일 안에 모두 넣었습니다 */
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    display: grid; place-items: center; padding: 24px; text-align: center;
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+    color: #eef3ff; word-break: keep-all;
+    background: radial-gradient(700px 400px at 50% 110%, rgba(59,130,246,.35), transparent 70%), linear-gradient(180deg, #04070f, #080d1b);
+  }
+  .code { font-size: clamp(72px, 16vw, 140px); font-weight: 800; letter-spacing: -.05em; line-height: 1;
+    background: linear-gradient(100deg, #fff 10%, #7dd3fc 55%, #60a5fa 90%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  h1 { margin: 18px 0 10px; font-size: clamp(22px, 3.4vw, 30px); letter-spacing: -.02em; }
+  p { margin: 0; color: rgba(226,234,250,.72); line-height: 1.7; }
+  .row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 32px; }
+  a { display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px; border-radius: 999px; font-weight: 700; text-decoration: none; }
+  .primary { background: #2563eb; color: #fff; }
+  .ghost { border: 1px solid rgba(255,255,255,.24); color: #fff; }
+  a:focus-visible { outline: 2px solid #7dd3fc; outline-offset: 3px; }
+</style>
+</head>
+<body>
+  <main>
+    <div class="code" aria-hidden="true">404</div>
+    <h1>페이지를 찾을 수 없습니다</h1>
+    <p>주소가 바뀌었거나 삭제된 페이지입니다.<br>The page you are looking for could not be found.</p>
+    <div class="row">
+      <a class="primary" id="homeLink" href="/">홈으로 · Home</a>
+      <a class="ghost" id="contactLink" href="/contact.html">문의하기 · Contact</a>
+    </div>
+  </main>
+  <script>
+    // 깃허브 기본 주소(…github.io/저장소이름/)에서 열린 경우에도 홈으로 돌아가도록 기준 경로를 맞춥니다
+    (function () {
+      var m = location.pathname.match(/^\/[^/]+\//);
+      var base = location.hostname.endsWith('github.io') && m ? m[0] : '/';
+      document.getElementById('homeLink').href = base;
+      document.getElementById('contactLink').href = base + 'contact.html';
+    })();
+  </script>
+</body>
+</html>
