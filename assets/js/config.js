@@ -1,28 +1,27 @@
 /* ============================================================
-   주식회사 그린파스처 · 문의 · 신청서 이메일 전송 설정
+   주식회사 그린파스처 · 문의 · 신청서 전송 설정
    ------------------------------------------------------------
-   홈페이지의 문의하기 · 신청 · 예약 양식은 서버 없이 "이메일"로 전달됩니다.
-   아래 값은 브라우저에 그대로 보이는 공개 값입니다. (비밀번호 등은 넣지 마십시오)
+   홈페이지의 문의하기 · 신청 · 예약 양식은 서버 · 데이터베이스 없이
+   "구글 시트 기록 + 이메일" 또는 "이메일"로 전달됩니다.
+   아래 값은 브라우저에 그대로 보이는 공개 값입니다. (비밀번호는 넣지 마십시오)
 
-   EMAIL_SERVICE 에 따라 동작이 달라집니다.
-     'web3forms'   → Web3Forms 로 바로 전송 (권장 · 무료 월 250건)
-                     WEB3FORMS_ACCESS_KEY 가 필요합니다.
-     'apps-script' → 구글 Apps Script 로 전송 (구글 시트에 기록 + 메일 발송)
-                     APPS_SCRIPT_URL 이 필요합니다.
-     ''            → 방문자의 메일 앱을 열어 RECEIVER_EMAIL 로 보내게 합니다.
+   ▸ 아래 두 칸 중 하나만 채우면 자동으로 그 방식이 쓰입니다.
+       APPS_SCRIPT_URL       구글 시트에 기록 + 회사 이메일로 알림 (권장)
+       WEB3FORMS_ACCESS_KEY  Web3Forms 가 회사 이메일로 전달 (가장 간단)
+   ▸ 둘 다 비어 있으면 방문자의 메일 앱을 열어 RECEIVER_EMAIL 로 보내게 합니다.
+     (설정 전에도 신청서를 받을 수 있습니다)
 
-   키나 주소가 비어 있으면 자동으로 '메일 앱' 방식으로 동작하므로
-   설정 전에도 신청서를 받을 수 있습니다.
    설정 방법: docs/이메일-접수-설정.md
    ============================================================ */
 window.GP_CONFIG = {
-  EMAIL_SERVICE: 'web3forms',
+  /* 'auto' 면 채워진 값을 보고 고릅니다. 특정 방식만 쓰려면 'apps-script' 또는 'web3forms' */
+  EMAIL_SERVICE: 'auto',
 
-  /* web3forms.com 에서 받은 Access Key (신청서를 받을 이메일로 발급) */
-  WEB3FORMS_ACCESS_KEY: '',
-
-  /* 구글 Apps Script 웹 앱 주소 (EMAIL_SERVICE 가 'apps-script' 일 때만) */
+  /* 구글 Apps Script 웹 앱 주소 — https://script.google.com/macros/s/…/exec */
   APPS_SCRIPT_URL: '',
+
+  /* web3forms.com 에서 받은 Access Key */
+  WEB3FORMS_ACCESS_KEY: '',
 
   /* 신청서를 받는 회사 이메일 — 안내 문구와 '메일 앱' 방식에 쓰입니다 */
   RECEIVER_EMAIL: 'ceo@greenpasture.co.kr',

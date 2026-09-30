@@ -2,8 +2,8 @@
  * 문의 · 신청 양식 전송 (contact.html, apply.html)
  * -------------------------------------------------------------------------
  * 서버 · 데이터베이스 없이 신청서를 "이메일"로 보냅니다. 방법은 assets/js/config.js 에서 고릅니다.
- *   ▸ web3forms   : Web3Forms 가 회사 이메일로 바로 전달 (권장)
- *   ▸ apps-script : 구글 Apps Script 가 구글 시트에 기록하고 회사 이메일로 발송
+ *   ▸ apps-script : 구글 Apps Script 가 구글 시트에 기록하고 회사 이메일로 발송 (권장 · 기록 영구 보관)
+ *   ▸ web3forms   : Web3Forms 가 회사 이메일로 바로 전달 (가장 간단 · 월 250건)
  *   ▸ 설정 전     : 방문자의 메일 앱을 열어 회사 이메일로 보내게 합니다
  * 어떤 방법이든 전송에 실패하면 '메일 앱으로 보내기'와 전화번호를 함께 안내해 신청이 끊기지 않게 합니다.
  * ========================================================================= */
@@ -13,8 +13,11 @@
   const W3F_KEY = String(cfg.WEB3FORMS_ACCESS_KEY || '').trim();
   const GAS_URL = String(cfg.APPS_SCRIPT_URL || '').trim();
   // 실제로 쓸 수 있는 전송 방법 (키 · 주소가 비어 있으면 메일 앱 방식)
-  const MODE = SERVICE === 'web3forms' && W3F_KEY ? 'web3forms'
-    : SERVICE === 'apps-script' && /^https:\/\/script\.google\.com\//.test(GAS_URL) ? 'apps-script'
+  // 'auto'(기본): 구글 시트 주소가 있으면 구글 시트, 없고 Web3Forms 키가 있으면 Web3Forms, 둘 다 없으면 메일 앱
+  const GAS_OK = /^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec/.test(GAS_URL);
+  const AUTO = !SERVICE || SERVICE === 'auto';
+  const MODE = (SERVICE === 'apps-script' || AUTO) && GAS_OK ? 'apps-script'
+    : (SERVICE === 'web3forms' || AUTO) && W3F_KEY ? 'web3forms'
     : 'mailto';
   const form = document.querySelector('form[data-inquiry-form]');
   if (!form) return;

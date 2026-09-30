@@ -27,6 +27,11 @@ const SITE = {
   telEn: '+82 10-3497-2524',     // 해외 방문자용 표기
   telHref: '+821034972524',      // 국내 · 해외 어디서 눌러도 연결되는 국제 형식
   email: 'ceo@greenpasture.co.kr',
+  // 문자 버튼을 누르면 미리 채워지는 문구
+  smsKo: '[그린파스처 홈페이지 문의]\n성함:\n회사:\n문의 내용:',
+  smsEn: '[Green Pasture website inquiry]\nName:\nCompany:\nMessage:',
+  // 카카오톡 채널 1:1 채팅 주소 (예: 'https://pf.kakao.com/_xxxx/chat') — 넣으면 카톡 상담 버튼이 나타납니다
+  kakaoChat: '',
   addressKo: '경기도 광주시 곤지암읍 벌열미길 39-14',
   addressEn: '39-14, Beoryeolmi-gil, Gonjiam-eup, Gwangju-si, Gyeonggi-do, Republic of Korea',
   // 응대 시간 · 사업자등록번호 · 설립일은 확인되면 입력하세요. 비어 있으면 공개 화면에 나오지 않습니다.
@@ -55,7 +60,7 @@ const NAV_ITEMS = [
     href: 'about.html', ko: '회사 소개', en: 'About',
     children: [
       { href: 'about.html#story',         ko: '브랜드 스토리',   en: 'Brand Story' },
-      { href: 'about.html#message',       ko: 'CEO 인사말',     en: 'CEO Message' },
+      { href: 'about.html#message',       ko: '대표 인사말',     en: 'CEO Message' },
       { href: 'about.html#leadership',    ko: '경영진',         en: 'Leadership' },
       { href: 'about.html#overview',      ko: '회사 개요',       en: 'Company Overview' },
       { href: 'about.html#certification', ko: '인증 · 특허',     en: 'Certifications' },
@@ -86,6 +91,7 @@ const S = 'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1
 const ICON = {
   phone: `<svg ${S}><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>`,
   mail: `<svg ${S}><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>`,
+  sms: `<svg ${S}><path d="M21 12a8 8 0 0 1-11.6 7.1L4 21l1.9-5.4A8 8 0 1 1 21 12Z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg>`,
   pin: `<svg ${S}><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>`,
   clock: `<svg ${S}><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>`,
   globe: `<svg ${S}><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>`,
@@ -195,6 +201,11 @@ function buildHeader() {
         <a class="btn btn--primary" href="apply.html?type=quote">
           <span data-lang="ko">견적 요청하기</span><span data-lang="en">Request a Quote</span>${ICON.arrow}
         </a>
+        <div class="nav__reach">
+          <a class="btn btn--line-dark btn--sm" href="tel:${SITE.telHref}">${ICON.phone}<span data-lang="ko">전화</span><span data-lang="en">Call</span></a>
+          <a class="btn btn--line-dark btn--sm only-touch" href="#" data-sms>${ICON.sms}<span data-lang="ko">문자</span><span data-lang="en">Text</span></a>
+          ${SITE.kakaoChat ? `<a class="btn btn--kakao btn--sm" href="${SITE.kakaoChat}" target="_blank" rel="noopener">${ICON.kakao}<span data-lang="ko">카톡 상담</span><span data-lang="en">KakaoTalk</span></a>` : ''}
+        </div>
         <div class="contact">
           <a href="tel:${SITE.telHref}"><span data-lang="ko">${SITE.tel}</span><span data-lang="en">${SITE.telEn}</span></a>
           <a href="mailto:${SITE.email}">${SITE.email}</a>
@@ -283,6 +294,8 @@ function buildFooter() {
 </footer>
 
 <div class="quick">
+  ${SITE.kakaoChat ? `<a class="quick__kakao" href="${SITE.kakaoChat}" target="_blank" rel="noopener" aria-label="카카오톡 상담" data-ko-label="카카오톡 상담" data-en-label="Chat on KakaoTalk">${ICON.kakao}</a>` : ''}
+  <a class="only-touch" href="#" data-sms aria-label="문자 문의" data-ko-label="문자 문의" data-en-label="Send a text">${ICON.sms}</a>
   <a class="quick__cta" href="contact.html" aria-label="문의하기" data-ko-label="문의하기" data-en-label="Contact us">${ICON.mail}</a>
   <a href="tel:${SITE.telHref}" aria-label="전화 문의" data-ko-label="전화 문의" data-en-label="Call us">${ICON.phone}</a>
   <button type="button" class="quick__top" id="toTop" aria-label="맨 위로" data-ko-label="맨 위로" data-en-label="Back to top">${ICON.top}</button>
@@ -527,6 +540,42 @@ function initSubnav() {
 }
 
 /* =========================================================
+ * 12-A. 문자 버튼 — <a data-sms> 에 휴대폰 종류에 맞는 문자 주소를 넣습니다
+ *       (아이폰은 sms:번호&body=, 안드로이드는 sms:번호?body= 형식을 씁니다)
+ *       data-sms-ko / data-sms-en 으로 페이지별 문구를 바꿀 수 있습니다
+ * ========================================================= */
+function smsHref(body) {
+  const num = SITE.telHref;
+  const ios = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  return 'sms:' + num + (ios ? '&' : '?') + 'body=' + encodeURIComponent(body);
+}
+function updateSmsLinks() {
+  const en = getLang() === 'en';
+  document.querySelectorAll('a[data-sms]').forEach(function (a) {
+    const body = en ? (a.dataset.smsEn || SITE.smsEn) : (a.dataset.smsKo || SITE.smsKo);
+    a.setAttribute('href', smsHref(body));
+  });
+}
+document.addEventListener('gp:lang', updateSmsLinks);
+
+/* 카카오톡 상담 링크 — <a data-kakao> 는 SITE.kakaoChat 이 있으면 그 주소로,
+   없으면 공개 화면에서 숨기고 검토 모드에서만 보여 줍니다 */
+function initKakaoLinks() {
+  document.querySelectorAll('a[data-kakao]').forEach(function (a) {
+    if (SITE.kakaoChat) {
+      a.setAttribute('href', SITE.kakaoChat);
+      a.setAttribute('target', '_blank');
+      a.setAttribute('rel', 'noopener');
+      a.classList.remove('tbd-only');
+    } else {
+      a.classList.add('tbd-only');
+      a.setAttribute('data-tbd', '카카오톡 채널 1:1 채팅 주소를 받으면 site.js 의 SITE.kakaoChat 에 입력하세요. 그 전에는 공개 화면에 보이지 않습니다.');
+      a.removeAttribute('href');
+    }
+  });
+}
+
+/* =========================================================
  * 12-B. 지도 — 페이지를 스크롤하다 지도에 걸려 멈추지 않도록
  *       처음에는 덮개를 씌워 두고, 누르면 지도를 움직일 수 있게 합니다
  * ========================================================= */
@@ -714,6 +763,8 @@ document.addEventListener('DOMContentLoaded', function () {
   initFilters();
   initSubnav();
   initMaps();
+  updateSmsLinks();
+  initKakaoLinks();
   initHeroCanvas();
   initReview();
 });
