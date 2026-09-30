@@ -1,29 +1,33 @@
 /* ============================================================
-   주식회사 그린파스처 · 온라인 접수 연결 설정
+   주식회사 그린파스처 · 문의 · 신청서 이메일 전송 설정
    ------------------------------------------------------------
-   여기 값들은 브라우저에 그대로 노출되는 "공개 값"입니다.
-   저장소에 올라가도 안전합니다. (비밀 키는 절대 여기 두지 마십시오)
+   홈페이지의 문의하기 · 신청 · 예약 양식은 서버 없이 "이메일"로 전달됩니다.
+   아래 값은 브라우저에 그대로 보이는 공개 값입니다. (비밀번호 등은 넣지 마십시오)
 
-   ▸ SUPABASE_URL 이 비어 있으면 문의·신청 양식은
-     방문자의 메일 앱을 열어 FALLBACK_EMAIL 로 보내는 방식으로 동작합니다.
-   ▸ 값을 채우는 방법은 docs/SETUP.md 를 보십시오.
+   EMAIL_SERVICE 에 따라 동작이 달라집니다.
+     'web3forms'   → Web3Forms 로 바로 전송 (권장 · 무료 월 250건)
+                     WEB3FORMS_ACCESS_KEY 가 필요합니다.
+     'apps-script' → 구글 Apps Script 로 전송 (구글 시트에 기록 + 메일 발송)
+                     APPS_SCRIPT_URL 이 필요합니다.
+     ''            → 방문자의 메일 앱을 열어 RECEIVER_EMAIL 로 보내게 합니다.
+
+   키나 주소가 비어 있으면 자동으로 '메일 앱' 방식으로 동작하므로
+   설정 전에도 신청서를 받을 수 있습니다.
+   설정 방법: docs/이메일-접수-설정.md
    ============================================================ */
 window.GP_CONFIG = {
-  /* Supabase 프로젝트 주소. 예: https://abcdefgh.supabase.co */
-  SUPABASE_URL: "",
+  EMAIL_SERVICE: 'web3forms',
 
-  /* 공개(anon) 키. 대시보드 > Project Settings > API Keys */
-  SUPABASE_ANON_KEY: "",
+  /* web3forms.com 에서 받은 Access Key (신청서를 받을 이메일로 발급) */
+  WEB3FORMS_ACCESS_KEY: '',
 
-  /* 접수 함수 이름 — 바꾸지 마십시오 */
-  SUBMIT_FUNCTION: "submit-inquiry",
+  /* 구글 Apps Script 웹 앱 주소 (EMAIL_SERVICE 가 'apps-script' 일 때만) */
+  APPS_SCRIPT_URL: '',
 
-  /* Cloudflare Turnstile 사이트 키. 비워두면 캡차 없이 동작합니다. */
-  TURNSTILE_SITE_KEY: "",
+  /* 신청서를 받는 회사 이메일 — 안내 문구와 '메일 앱' 방식에 쓰입니다 */
+  RECEIVER_EMAIL: 'ceo@greenpasture.co.kr',
 
-  /* 온라인 접수가 연결되기 전, 메일로 받을 주소 */
-  FALLBACK_EMAIL: "ceo@greenpasture.co.kr",
-
-  /* 접수 실패 시 안내할 전화번호 */
-  TEL: "010-3497-2524",
+  /* 전송 실패 시 안내할 전화번호 */
+  TEL: '010-3497-2524',
+  TEL_INTL: '+82 10-3497-2524',
 };

@@ -21,16 +21,18 @@ const SITE = {
   nameEn: 'Green Pasture Co., Ltd.',
   shortKo: '그린파스처',
   shortEn: 'Green Pasture',
-  ceoKo: '송창근 · 박건식 (공동대표)',
-  ceoEn: 'Song Chang-geun · Park Geon-sik (Co-CEOs)',
+  ceoKo: '송창근 · 박건식',
+  ceoEn: 'Song Chang-geun · Park Geon-sik',
   tel: '010-3497-2524',
-  telHref: '01034972524',
+  telEn: '+82 10-3497-2524',     // 해외 방문자용 표기
+  telHref: '+821034972524',      // 국내 · 해외 어디서 눌러도 연결되는 국제 형식
   email: 'ceo@greenpasture.co.kr',
   addressKo: '경기도 광주시 곤지암읍 벌열미길 39-14',
   addressEn: '39-14, Beoryeolmi-gil, Gonjiam-eup, Gwangju-si, Gyeonggi-do, Republic of Korea',
-  hoursKo: '평일 09:00 – 18:00 (주말·공휴일 휴무)',
-  hoursEn: 'Weekdays 09:00 – 18:00 KST',
-  bizNo: '',        // 사업자등록번호 — 받으면 입력하세요 (예: '123-45-67890')
+  // 응대 시간 · 사업자등록번호 · 설립일은 확인되면 입력하세요. 비어 있으면 공개 화면에 나오지 않습니다.
+  hoursKo: '',      // 예: '평일 09:00 – 18:00 (주말 · 공휴일 휴무)'
+  hoursEn: '',      // 예: 'Mon–Fri 09:00–18:00 KST (closed weekends & public holidays)'
+  bizNo: '',        // 예: '123-45-67890'
   sites: ['www.greenpasture.co.kr', 'www.vzero.co.kr'],
   // SNS 주소를 넣으면 푸터에 아이콘이 나타납니다. 비워두면 표시되지 않습니다.
   sns: {
@@ -144,7 +146,7 @@ const SNS_LABEL = {
 /* 로고 — 원본 로고 파일을 받으면 assets/img/logo-gp.png 를 같은 이름으로 교체하세요 */
 function logoHtml() {
   return `
-  <a class="brand" href="index.html" aria-label="${SITE.nameKo} 홈">
+  <a class="brand" href="index.html" aria-label="${SITE.nameKo} 홈" data-ko-label="${SITE.nameKo} 홈" data-en-label="${SITE.nameEn} home">
     <img class="brand__mark" src="assets/img/logo-gp.png" alt="" width="155" height="110">
     <span class="brand__text">
       <span class="brand__ko"><span data-lang="ko">${SITE.shortKo}</span><span data-lang="en">${SITE.shortEn}</span></span>
@@ -183,10 +185,10 @@ function buildHeader() {
 <header class="site-header" id="siteHeader">
   <div class="wrap">
     ${logoHtml()}
-    <nav class="nav" id="mainNav" aria-label="주 메뉴">
+    <nav class="nav" id="mainNav" aria-label="주 메뉴" data-ko-label="주 메뉴" data-en-label="Main menu">
       <ul class="nav__list">${items}</ul>
       <div class="nav__mobile-extra">
-        <div class="lang-toggle" role="group" aria-label="언어 선택 / Language">
+        <div class="lang-toggle" role="group" aria-label="언어 선택 / Language" data-ko-label="언어 선택" data-en-label="Language">
           <button type="button" data-set-lang="ko">KOR</button>
           <button type="button" data-set-lang="en">ENG</button>
         </div>
@@ -194,20 +196,20 @@ function buildHeader() {
           <span data-lang="ko">견적 요청하기</span><span data-lang="en">Request a Quote</span>${ICON.arrow}
         </a>
         <div class="contact">
-          <a href="tel:${SITE.telHref}">${SITE.tel}</a>
+          <a href="tel:${SITE.telHref}"><span data-lang="ko">${SITE.tel}</span><span data-lang="en">${SITE.telEn}</span></a>
           <a href="mailto:${SITE.email}">${SITE.email}</a>
         </div>
       </div>
     </nav>
     <div class="header__actions">
-      <div class="lang-toggle" role="group" aria-label="언어 선택 / Language">
+      <div class="lang-toggle" role="group" aria-label="언어 선택 / Language" data-ko-label="언어 선택" data-en-label="Language">
         <button type="button" data-set-lang="ko">KOR</button>
         <button type="button" data-set-lang="en">ENG</button>
       </div>
       <a class="btn btn--primary btn--sm" href="apply.html?type=quote">
         <span data-lang="ko">견적 요청</span><span data-lang="en">Get a Quote</span>
       </a>
-      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="메뉴 열기">
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="메뉴 열기" data-ko-label="메뉴 열기" data-en-label="Open menu">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -218,8 +220,8 @@ function buildHeader() {
 function snsHtml() {
   const keys = Object.keys(SITE.sns).filter(function (k) { return SITE.sns[k]; });
   if (!keys.length) {
-    return `<div class="sns"><span class="sns__pending" data-tbd="SNS 채널 주소(인스타그램·유튜브·블로그·카카오톡 채널 등)를 받으면 site.js 의 SITE.sns 에 입력하세요.">
-      <span data-lang="ko">SNS 채널 준비 중</span><span data-lang="en">Social channels coming soon</span></span></div>`;
+    // 주소가 하나도 없으면 공개 화면에는 아무것도 보이지 않고, 검토 모드에서만 자리가 표시됩니다
+    return `<div class="sns tbd-only"><span class="sns__pending" data-tbd="SNS 채널 주소(인스타그램 · 유튜브 · 블로그 · 카카오톡 채널 등)를 받으면 site.js 의 SITE.sns 에 입력하세요.">SNS</span></div>`;
   }
   return `<div class="sns">${keys.map(function (k) {
     return `<a href="${SITE.sns[k]}" target="_blank" rel="noopener" aria-label="${SNS_LABEL[k]}" title="${SNS_LABEL[k]}">${ICON[k]}</a>`;
@@ -244,22 +246,22 @@ function buildFooter() {
     </div>
     <div class="footer__col">
       <h4>Menu</h4>
-      <nav class="footer__links" aria-label="푸터 메뉴">${menu}</nav>
+      <nav class="footer__links" aria-label="푸터 메뉴" data-ko-label="푸터 메뉴" data-en-label="Footer menu">${menu}</nav>
     </div>
     <div class="footer__col">
       <h4>Business</h4>
-      <nav class="footer__links" aria-label="사업 안내">${biz}</nav>
+      <nav class="footer__links" aria-label="사업 안내" data-ko-label="사업 안내" data-en-label="Business">${biz}</nav>
     </div>
     <div class="footer__col">
       <h4>Contact</h4>
       <div class="footer__info">
-        <span><b>T.</b><a href="tel:${SITE.telHref}">${SITE.tel}</a></span>
+        <span><b>T.</b><a href="tel:${SITE.telHref}"><span data-lang="ko">${SITE.tel}</span><span data-lang="en">${SITE.telEn}</span></a></span>
         <span><b>E.</b><a href="mailto:${SITE.email}">${SITE.email}</a></span>
         <span data-lang="ko"><b>A.</b>${SITE.addressKo}</span>
         <span data-lang="en"><b>A.</b>${SITE.addressEn}</span>
-        <span data-tbd="운영 시간은 임시값입니다. 실제 응대 시간을 확인하세요.">
-          <span data-lang="ko"><b>H.</b>${SITE.hoursKo}</span><span data-lang="en"><b>H.</b>${SITE.hoursEn}</span>
-        </span>
+        ${SITE.hoursKo
+          ? `<span><span data-lang="ko"><b>H.</b>${SITE.hoursKo}</span><span data-lang="en"><b>H.</b>${SITE.hoursEn || SITE.hoursKo}</span></span>`
+          : `<span class="tbd-only" data-tbd="응대 시간을 받으면 site.js 의 SITE.hoursKo · hoursEn 에 입력하세요."><b>H.</b>(응대 시간)</span>`}
         <span><b>W.</b>${SITE.sites.join(' · ')}</span>
       </div>
     </div>
@@ -267,13 +269,13 @@ function buildFooter() {
   <div class="wrap footer__bottom">
     <p class="footer__biz">
       <span data-lang="ko">${SITE.nameKo}</span><span data-lang="en">${SITE.nameEn}</span>
-      <span data-lang="ko">대표 ${SITE.ceoKo}</span><span data-lang="en">${SITE.ceoEn}</span>
+      <span data-lang="ko">공동대표 ${SITE.ceoKo}</span><span data-lang="en">Co-CEOs ${SITE.ceoEn}</span>
       ${SITE.bizNo
         ? `<span><span data-lang="ko">사업자등록번호</span><span data-lang="en">Business Reg. No.</span> ${SITE.bizNo}</span>`
-        : `<span data-tbd="사업자등록번호를 받으면 site.js 의 SITE.bizNo 에 입력하세요."><span data-lang="ko">사업자등록번호 (확인 후 기재)</span><span data-lang="en">Business Reg. No. (TBA)</span></span>`}
+        : `<span class="tbd-only" data-tbd="사업자등록번호를 받으면 site.js 의 SITE.bizNo 에 입력하세요.">사업자등록번호 (확인 후 기재)</span>`}
       <br>© ${year} ${SITE.nameEn} All rights reserved.
     </p>
-    <nav aria-label="정책">
+    <nav aria-label="정책" data-ko-label="정책" data-en-label="Policies">
       <a class="is-strong" href="privacy.html"><span data-lang="ko">개인정보처리방침</span><span data-lang="en">Privacy Policy</span></a>
       <a href="contact.html"><span data-lang="ko">문의하기</span><span data-lang="en">Contact</span></a>
     </nav>
@@ -281,9 +283,9 @@ function buildFooter() {
 </footer>
 
 <div class="quick">
-  <a class="quick__cta" href="contact.html" aria-label="문의하기 / Contact">${ICON.mail}</a>
-  <a href="tel:${SITE.telHref}" aria-label="전화 문의 / Call">${ICON.phone}</a>
-  <button type="button" class="quick__top" id="toTop" aria-label="맨 위로 / Back to top">${ICON.top}</button>
+  <a class="quick__cta" href="contact.html" aria-label="문의하기" data-ko-label="문의하기" data-en-label="Contact us">${ICON.mail}</a>
+  <a href="tel:${SITE.telHref}" aria-label="전화 문의" data-ko-label="전화 문의" data-en-label="Call us">${ICON.phone}</a>
+  <button type="button" class="quick__top" id="toTop" aria-label="맨 위로" data-ko-label="맨 위로" data-en-label="Back to top">${ICON.top}</button>
 </div>`;
 }
 
@@ -310,12 +312,18 @@ function setLang(lang, remember) {
   // 제목
   const en = document.querySelector('meta[name="gp:title-en"]');
   document.title = value === 'en' && en ? en.content : PAGE_TITLE_KO;
-  // placeholder · aria-label 등 속성 번역
-  document.querySelectorAll('[data-ko-placeholder]').forEach(function (el) {
-    el.setAttribute('placeholder', value === 'en' ? (el.dataset.enPlaceholder || el.dataset.koPlaceholder) : el.dataset.koPlaceholder);
+  // 속성 번역: data-ko-placeholder / data-ko-label(aria-label) / data-ko-alt / data-ko-title
+  //           각각 data-en-… 값이 영어 화면에서 쓰입니다
+  [['placeholder', 'Placeholder'], ['aria-label', 'Label'], ['alt', 'Alt'], ['title', 'Title']].forEach(function (pair) {
+    document.querySelectorAll('[data-ko-' + pair[1].toLowerCase() + ']').forEach(function (el) {
+      const ko = el.dataset['ko' + pair[1]];
+      const en = el.dataset['en' + pair[1]];
+      el.setAttribute(pair[0], value === 'en' ? (en || ko) : ko);
+    });
   });
-  document.querySelectorAll('[data-ko-label]').forEach(function (el) {
-    el.setAttribute('aria-label', value === 'en' ? (el.dataset.enLabel || el.dataset.koLabel) : el.dataset.koLabel);
+  // <option data-ko="…" data-en="…"> 선택 목록 문구
+  document.querySelectorAll('option[data-ko]').forEach(function (opt) {
+    opt.textContent = value === 'en' ? (opt.dataset.en || opt.dataset.ko) : opt.dataset.ko;
   });
   document.dispatchEvent(new CustomEvent('gp:lang', { detail: value }));
 }
@@ -368,8 +376,11 @@ function initNav() {
   const mobile = window.matchMedia('(max-width: 1024px)');
 
   function setOpen(open) {
+    const en = getLang() === 'en';
     toggle.setAttribute('aria-expanded', String(open));
-    toggle.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+    toggle.dataset.koLabel = open ? '메뉴 닫기' : '메뉴 열기';
+    toggle.dataset.enLabel = open ? 'Close menu' : 'Open menu';
+    toggle.setAttribute('aria-label', en ? toggle.dataset.enLabel : toggle.dataset.koLabel);
     nav.classList.toggle('is-open', open);
     header.classList.toggle('is-open', open);
     document.body.classList.toggle('is-locked', open);
@@ -502,11 +513,37 @@ function initSubnav() {
       const a = map.get(entry.target);
       if (a) {
         a.classList.add('is-active');
-        a.scrollIntoView({ block: 'nearest', inline: 'center' });
+        // 탭 줄만 가로로 옮깁니다. (scrollIntoView 는 페이지 전체 스크롤을 끊어 먹어서 쓰지 않습니다)
+        const list = a.parentElement;
+        if (list && list.scrollWidth > list.clientWidth) {
+          const lr = list.getBoundingClientRect(), ar = a.getBoundingClientRect();
+          const left = list.scrollLeft + (ar.left - lr.left) - (lr.width - ar.width) / 2;
+          list.scrollTo({ left: Math.max(0, left), behavior: 'smooth' });
+        }
       }
     });
   }, { rootMargin: '-45% 0px -50% 0px' });
   map.forEach(function (_, sec) { io.observe(sec); });
+}
+
+/* =========================================================
+ * 12-B. 지도 — 페이지를 스크롤하다 지도에 걸려 멈추지 않도록
+ *       처음에는 덮개를 씌워 두고, 누르면 지도를 움직일 수 있게 합니다
+ * ========================================================= */
+function initMaps() {
+  document.querySelectorAll('.map__frame').forEach(function (frame) {
+    if (frame.querySelector('.map__shield')) return;
+    const shield = document.createElement('button');
+    shield.type = 'button';
+    shield.className = 'map__shield';
+    shield.innerHTML = '<span><span data-lang="ko">눌러서 지도 움직이기</span><span data-lang="en">Tap to use the map</span></span>';
+    shield.addEventListener('click', function () { frame.classList.add('is-active'); });
+    frame.appendChild(shield);
+    frame.addEventListener('mouseleave', function () { frame.classList.remove('is-active'); });
+    document.addEventListener('touchstart', function (e) {
+      if (!frame.contains(e.target)) frame.classList.remove('is-active');
+    }, { passive: true });
+  });
 }
 
 /* =========================================================
@@ -676,6 +713,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initAccordion();
   initFilters();
   initSubnav();
+  initMaps();
   initHeroCanvas();
   initReview();
 });

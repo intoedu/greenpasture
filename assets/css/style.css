@@ -92,6 +92,8 @@
    ========================================================= */
 *, *::before, *::after { box-sizing: border-box; }
 [hidden] { display: none !important; }
+/* 자료가 아직 없는 자리 — 공개 화면에서는 숨기고, 검토 모드(?review)에서만 보입니다 */
+html:not(.is-review) .tbd-only { display: none !important; }
 
 html {
   scroll-behavior: smooth;
@@ -1009,6 +1011,17 @@ a.contact-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); b
 }
 .map__frame { min-height: 420px; background: var(--bg-deep); position: relative; }
 .map__frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.map__shield {
+  position: absolute; inset: 0; z-index: 2; width: 100%; display: grid; place-items: end center; padding-bottom: 18px;
+  background: transparent; cursor: pointer;
+}
+.map__shield > span {
+  padding: 8px 14px; border-radius: 999px; background: rgba(8,13,27,.78); color: #fff; font-size: 13px; font-weight: 600;
+  opacity: 0; transform: translateY(4px); transition: opacity .2s var(--ease), transform .2s var(--ease);
+}
+.map__frame:hover .map__shield > span, .map__shield:focus-visible > span { opacity: 1; transform: none; }
+.map__frame.is-active .map__shield { display: none; }
+@media (hover: none) { .map__shield > span { opacity: 1; transform: none; } }
 .map__info { padding: clamp(28px, 3.5vw, 44px); display: flex; flex-direction: column; gap: 22px; }
 .map__info dl { display: grid; gap: 18px; }
 .map__info dt { font-size: 13px; font-weight: 700; letter-spacing: .06em; color: var(--muted); }
