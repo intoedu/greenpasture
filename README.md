@@ -6,7 +6,8 @@ Green Pasture Co., Ltd. 공식 홈페이지 소스입니다. 나노 촉매 코�
 메모장이나 VS Code 같은 편집기로 직접 수정하실 수 있습니다.
 
 > 📋 오픈 전에 고객사에 받아야 할 자료와 확인할 내용은 **[docs/고객-확인사항.md](docs/고객-확인사항.md)** 에,
-> 온라인 접수(데이터베이스 · 관리자 페이지) 설치 방법은 **[docs/SETUP.md](docs/SETUP.md)** 에 정리했습니다.
+> 온라인 접수를 **구글 시트**로 받는 설치 방법은 **[docs/GOOGLE-SHEET.md](docs/GOOGLE-SHEET.md)** 에,
+> 데이터베이스 · 관리자 페이지(Supabase) 방식은 **[docs/SETUP.md](docs/SETUP.md)** 에 정리했습니다.
 
 ---
 
@@ -57,6 +58,7 @@ Green Pasture Co., Ltd. 공식 홈페이지 소스입니다. 나노 촉매 코�
 │  ├─ js/admin.js         관리자 화면
 │  ├─ data/posts.js       ★ 게시글 내용 (새 글은 여기에)
 │  └─ img/                로고 · 사진 · 공유 이미지
+├─ google-sheet/Code.gs   구글 시트 접수 연결 코드 (docs/GOOGLE-SHEET.md)
 ├─ supabase/              온라인 접수 데이터베이스 · 접수 함수 (docs/SETUP.md)
 ├─ docs/                  설치 안내 · 고객 확인사항 (웹사이트에는 올라가지 않음)
 └─ .github/workflows/     자동 배포 · 데이터베이스 깨우기
@@ -154,10 +156,15 @@ HTML 에서는 `data-tbd="메모"` 가 붙은 곳이 해당 항목입니다.
 
 ## 6. 문의 · 신청 접수 방식
 
-| 단계 | 동작 |
+`assets/js/config.js` 에 무엇을 채웠는지에 따라 접수 방식이 정해집니다.
+
+| 설정 | 동작 |
 |---|---|
-| **지금 (연결 전)** | 양식을 제출하면 방문자의 **메일 앱이 열리고** 내용이 채워진 채 `ceo@greenpasture.co.kr` 로 보낼 준비가 됩니다. 메일 앱이 없는 방문자를 위해 "내용 복사" 버튼과 전화번호도 함께 안내합니다. |
-| **연결 후** | `docs/SETUP.md` 대로 Supabase 를 설치하고 `assets/js/config.js` 에 주소 · 공개 키를 넣으면, 양식이 **데이터베이스에 바로 저장**되고 담당자에게 알림 메일이 갑니다. 접수 내역은 `admin.html` 에서 확인 · 상태 변경 · 메모 · 엑셀(CSV) 내려받기를 합니다. |
+| **둘 다 비어 있음 (지금)** | 양식을 제출하면 방문자의 **메일 앱이 열리고** 내용이 채워진 채 `ceo@greenpasture.co.kr` 로 보낼 준비가 됩니다. 방문자가 메일 앱에서 전송을 눌러야 접수가 끝납니다. 메일 앱이 없는 방문자를 위해 "내용 복사" 버튼과 전화번호도 함께 안내합니다. |
+| **`SHEET_URL` 채움 (구글 시트)** | `docs/GOOGLE-SHEET.md` 대로 연결하면 양식이 **구글 시트에 바로 한 줄씩 저장**되고, 담당자에게 알림 메일이 갑니다(구글 하루 한도 안에서. 넘으면 저장만 됨). 접수 내역은 시트에서 처리상태 · 메모를 적어 관리합니다. 연결 코드는 `google-sheet/Code.gs`. |
+| **`SUPABASE_URL` 채움** | `docs/SETUP.md` 대로 Supabase 를 설치하면 양식이 **데이터베이스에 저장**되고, 접수 내역은 `admin.html` 에서 확인합니다. 두 값이 모두 있으면 이쪽이 우선합니다. |
+
+서버 연결에 문제가 생겨 접수가 실패하면, 방문자 화면에 **"작성한 내용을 메일로 보내기"** 버튼이 함께 나타나 작성한 내용을 잃지 않습니다.
 
 양식에는 자동 입력 프로그램을 걸러내는 보이지 않는 칸(허니팟)과 개인정보 수집 · 이용 동의가 들어 있습니다.
 연결 후에는 반복 접수 제한과 (선택) Cloudflare Turnstile 캡차도 동작합니다.
@@ -169,7 +176,7 @@ HTML 에서는 `data-tbd="메모"` 가 붙은 곳이 해당 항목입니다.
 ### 자동 배포
 `main` 브랜치에 변경 사항이 올라가면 GitHub 가 1~2분 안에 홈페이지를 자동으로 갱신합니다.
 설정은 `.github/workflows/deploy-pages.yml` 에 있으며, **홈페이지에 필요한 파일만** 올라갑니다
-(`docs/`, `supabase/`, `README.md` 는 웹사이트에 올라가지 않습니다).
+(`docs/`, `google-sheet/`, `supabase/`, `README.md` 는 웹사이트에 올라가지 않습니다).
 
 - 기본 주소 : `https://intoedu.github.io/greenpasture/`
 - 연결할 주소 : `https://www.greenpasture.co.kr`

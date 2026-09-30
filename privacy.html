@@ -49,7 +49,7 @@
         <ul>
           <li><strong>필수 항목</strong>: 성함, 연락처(전화번호), 이메일</li>
           <li><strong>선택 항목</strong>: 회사 · 기관명, 부서 · 직함, 국가, 산업 분야, 지역, 희망 일정, 문의 · 요청 내용에 기재한 정보</li>
-          <li><strong>자동 생성 정보</strong>: 접수 일시, 접수 페이지, 반복 접수 방지를 위한 접속 IP의 암호화 값(원래 IP는 저장하지 않음)</li>
+          <li><strong>자동 생성 정보</strong>: 접수 일시, 접수 페이지, 유입 경로(홈페이지로 들어오기 직전에 보던 페이지 주소)</li>
         </ul>
         <p>회사 홈페이지는 쿠키를 이용한 행태정보 수집이나 방문 분석 도구를 사용하지 않습니다. 방문자가 선택한 언어(한국어/영어) 설정은 방문자의 브라우저에만 저장됩니다.</p>
 
@@ -63,8 +63,8 @@
         <p>회사는 원활한 문의 · 신청 접수를 위해 다음과 같이 개인정보 처리 업무를 위탁하고 있습니다.</p>
         <table class="info-table">
           <tbody>
-            <tr><th scope="row">Supabase, Inc.</th><td>온라인 문의 · 신청 정보의 저장 및 관리 시스템 운영</td></tr>
-            <tr><th scope="row">Resend, Inc.</th><td>신규 문의 · 신청 알림 이메일 발송</td></tr>
+            <tr><th scope="row">Google LLC</th><td>온라인 문의 · 신청 정보의 저장(구글 스프레드시트) 및 신규 접수 알림 이메일 발송</td></tr>
+            <tr data-tbd="인투마케팅이 접수 알림 메일을 받고 접수 시트를 관리하므로 위탁에 해당하는 것으로 보입니다. 고객사와 위탁 사실 · 위탁 계약(개인정보 처리 위탁 조항)을 확인한 뒤 확정하세요."><th scope="row">인투마케팅</th><td>홈페이지 운영 및 온라인 문의 · 신청 접수 관리</td></tr>
           </tbody>
         </table>
         <p>회사는 위탁 계약 시 「개인정보 보호법」 제26조에 따라 위탁 업무 수행 목적 외 처리 금지, 안전성 확보 조치, 재위탁 제한, 관리 · 감독 등에 관한 사항을 정하고, 수탁자가 개인정보를 안전하게 처리하는지 감독합니다.</p>
@@ -73,8 +73,8 @@
         <p>회사는 위 위탁 업무 수행을 위해 다음과 같이 개인정보를 국외로 이전합니다.</p>
         <table class="info-table">
           <tbody>
-            <tr><th scope="row">이전받는 자</th><td>Supabase, Inc. (미국) / Resend, Inc. (미국)</td></tr>
-            <tr><th scope="row">이전 국가 · 장소</th><td>Supabase: 데이터는 대한민국(서울) 리전 서버에 저장되며, 운영사는 미국 법인입니다. / Resend: 미국</td></tr>
+            <tr><th scope="row">이전받는 자</th><td>Google LLC (미국)</td></tr>
+            <tr><th scope="row">이전 국가 · 장소</th><td>미국 등 Google이 운영하는 데이터센터 소재 국가 (저장 위치는 Google이 정합니다)</td></tr>
             <tr><th scope="row">이전 항목</th><td>제2조의 문의 · 신청 정보</td></tr>
             <tr><th scope="row">이전 일시 · 방법</th><td>문의 · 신청 접수 시 암호화된 네트워크(HTTPS)를 통해 전송</td></tr>
             <tr><th scope="row">이용 목적 · 보유 기간</th><td>제5조의 위탁 업무 수행 / 제3조의 보유 기간 또는 위탁 계약 종료 시까지</td></tr>
@@ -91,7 +91,7 @@
         <h3>제9조 (개인정보의 안전성 확보 조치)</h3>
         <ul>
           <li>관리적 조치: 개인정보 취급자 최소화 및 교육</li>
-          <li>기술적 조치: 관리자 계정별 접근 권한 관리, 열람 · 수정 기록 보관, 암호화 통신(HTTPS) 적용, 자동 입력 및 반복 접수 차단</li>
+          <li>기술적 조치: 접수 시트는 지정된 담당자 계정만 열람 · 수정할 수 있도록 공유 범위 제한, 수정 기록(버전 기록) 보관, 암호화 통신(HTTPS) 적용, 자동 입력 및 반복 접수 차단</li>
           <li>물리적 조치: 자료 보관 장소 및 단말기 접근 통제</li>
         </ul>
 
@@ -125,13 +125,13 @@
         <ul>
           <li><strong>Required</strong>: name, phone number, e-mail</li>
           <li><strong>Optional</strong>: company, title, country, industry, region, preferred schedule and information you include in your message</li>
-          <li><strong>Automatically generated</strong>: submission time, page, and a hashed IP value to prevent abuse (the original IP is not stored)</li>
+          <li><strong>Automatically generated</strong>: submission time, page, and the referring page address</li>
         </ul>
         <p>We do not use tracking cookies or analytics tools. Your language choice is stored only in your browser.</p>
         <h3>3. Retention</h3>
         <p>Information is kept for 3 years after your inquiry is resolved and then destroyed, unless a longer period is required by law.</p>
         <h3>4. Third parties, processors and overseas transfer</h3>
-        <p>We do not provide your information to third parties. We use Supabase, Inc. (USA; data stored in the Seoul, Korea region) to store submissions and Resend, Inc. (USA) to send notification e-mails. If you do not wish your information to be transferred, please contact us by phone (+82 10-3497-2524) or e-mail (ceo@greenpasture.co.kr) instead of the online form.</p>
+        <p>We do not provide your information to third parties. We use Google LLC (USA; data may be stored in countries where Google operates data centers) to store submissions in Google Sheets and to send notification e-mails, and IntoMarketing to operate the website and manage submissions. If you do not wish your information to be transferred, please contact us by phone (+82 10-3497-2524) or e-mail (ceo@greenpasture.co.kr) instead of the online form.</p>
         <h3>5. Your rights</h3>
         <p>You may request access, correction, deletion or suspension of processing at any time by phone or e-mail.</p>
         <h3>6. Privacy officer</h3>

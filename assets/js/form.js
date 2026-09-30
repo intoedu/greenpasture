@@ -1,15 +1,18 @@
 /* =========================================================================
  * 문의 · 신청 양식 전송 (contact.html, apply.html)
  * -------------------------------------------------------------------------
- * ▸ 온라인 접수가 연결된 경우 (assets/js/config.js 의 SUPABASE_URL 이 채워짐)
+ * ▸ SUPABASE_URL 이 채워진 경우 (assets/js/config.js)
  *     → Supabase 접수 함수(submit-inquiry)로 보내고, 관리자 페이지(admin.html)에서 확인합니다.
- * ▸ 아직 연결되지 않은 경우
+ * ▸ SUPABASE_URL 은 비어 있고 SHEET_URL 이 채워진 경우
+ *     → 구글 시트 접수 주소(Apps Script)로 보내고, 구글 시트에서 확인합니다. (docs/GOOGLE-SHEET.md)
+ * ▸ 둘 다 비어 있는 경우
  *     → 방문자의 메일 앱을 열어 FALLBACK_EMAIL 로 내용을 보내도록 안내합니다.
- * 양식은 데이터베이스에 직접 접근하지 않습니다.
+ * 양식은 데이터베이스 · 시트에 직접 접근하지 않습니다.
  * ========================================================================= */
 (function () {
   const cfg = window.GP_CONFIG || {};
   const API = String(cfg.SUPABASE_URL || '').trim().replace(/\/+$/, '');
+  const SHEET = API ? '' : (/^https:\/\//.test(String(cfg.SHEET_URL || '').trim()) ? String(cfg.SHEET_URL).trim() : '');
   const form = document.querySelector('form[data-inquiry-form]');
   if (!form) return;
 
@@ -84,7 +87,7 @@
 
   /* ---------------- 캡차 (Turnstile, 선택) ---------------- */
   let turnstileId = null;
-  if (cfg.TURNSTILE_SITE_KEY && API) {
+  if (cfg.TURNSTILE_SITE_KEY && (API || SHEET)) {
     const holder = document.createElement('div');
     holder.id = 'turnstile-holder';
     holder.style.marginTop = '20px';
@@ -112,6 +115,7 @@
     captcha_failed:   ['자동입력 방지 확인에 실패했습니다. 잠시 후 다시 시도해 주십시오.', 'Verification failed. Please try again shortly.'],
     rate_limited:     ['짧은 시간에 여러 번 접수하셨습니다. 잠시 후 다시 시도하시거나 전화로 연락 주십시오.', 'Too many submissions in a short time. Please try again later or call us.'],
     origin_not_allowed: ['접수 경로를 확인할 수 없습니다. 홈페이지 주소로 다시 접속해 주십시오.', 'Unrecognized origin. Please reload the site and try again.'],
+    busy:             ['지금 접수가 몰려 있습니다. 잠시 후 다시 시도해 주십시오.', 'We are receiving many requests right now. Please try again shortly.'],
     network:          ['인터넷 연결을 확인한 뒤 다시 시도해 주십시오.', 'Please check your connection and try again.']
   };
   function msg(code) {
@@ -125,10 +129,15 @@
     box.hidden = false;
     box.scrollIntoView({ block: 'center', behavior: 'smooth' });
   }
-  function fail(code) {
+  function fail(code, p) {
     say('bad', `<b>${L('접수되지 않았습니다.', 'Your request was not sent.')}</b><br>${esc(msg(code))}
-      <span class="sub">${L('계속 문제가 생기면', 'If the problem continues, please call')} <a href="tel:${TEL.replace(/[^0-9+]/g, '')}">${TEL}</a>${L(' 또는 ', ' or e-mail ')}<a href="mailto:${MAIL}">${MAIL}</a>${L(' 로 연락 주십시오.', '.')}</span>`);
+      <span class="sub">${L('계속 문제가 생기면', 'If the problem continues, please call')} <a href="tel:${TEL.replace(/[^0-9+]/g, '')}">${TEL}</a>${L(' 또는 ', ' or e-mail ')}<a href="mailto:${MAIL}">${MAIL}</a>${L(' 로 연락 주십시오.', '.')}</span>
+      ${p ? `<div class="btn-row" style="margin-top:14px"><button type="button" class="btn btn--line btn--sm" id="mailFallback">${L('작성한 내용을 메일로 보내기', 'Send what I wrote by e-mail')}</button></div>` : ''}`);
+    const mb = p && document.getElementById('mailFallback');
+    if (mb) mb.addEventListener('click', function () { sendByMail(p); });
   }
+  // 서버 · 연결 문제로 실패했을 때는 작성한 내용을 잃지 않도록 메일로 보내는 버튼을 함께 보여 줍니다.
+  const RETRY_BY_MAIL = ['network', 'server_error', 'busy', 'bad_request'];
   function markInvalid(name) {
     const f = form.querySelector(`[name="${name}"]`);
     const field = f && f.closest('.field');
@@ -247,30 +256,39 @@
     const bad = validate(p);
     if (bad) { if (bad[1]) markInvalid(bad[1]); fail(bad[0]); return; }
 
-    if (!API) { sendByMail(p); return; }
+    if (!API && !SHEET) { sendByMail(p); return; }
 
     const label = btn ? btn.innerHTML : '';
     if (btn) { btn.disabled = true; btn.textContent = L('접수 중입니다…', 'Sending…'); }
     try {
       p.turnstile_token = turnstileId !== null && window.turnstile ? window.turnstile.getResponse(turnstileId) : '';
-      const res = await fetch(`${API}/functions/v1/${cfg.SUBMIT_FUNCTION || 'submit-inquiry'}`, {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-          apikey: cfg.SUPABASE_ANON_KEY || '',
-          Authorization: `Bearer ${cfg.SUPABASE_ANON_KEY || ''}`
-        },
-        body: JSON.stringify(p)
-      });
+      const res = API
+        ? await fetch(`${API}/functions/v1/${cfg.SUBMIT_FUNCTION || 'submit-inquiry'}`, {
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json',
+              apikey: cfg.SUPABASE_ANON_KEY || '',
+              Authorization: `Bearer ${cfg.SUPABASE_ANON_KEY || ''}`
+            },
+            body: JSON.stringify(p)
+          })
+        // 구글 시트(Apps Script): 사전 확인 요청이 생기지 않도록 text/plain 으로 보냅니다.
+        : await fetch(SHEET, {
+            method: 'POST',
+            headers: { 'content-type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(p),
+            redirect: 'follow'
+          });
       const out = await res.json().catch(function () { return {}; });
       if (res.ok && out.ok) { done(p); return; }
       if (out.error && ['company_required', 'name_invalid', 'phone_invalid', 'email_invalid', 'date_required', 'date_invalid', 'message_required'].indexOf(out.error) > -1) {
         markInvalid({ company_required: 'company', name_invalid: 'name', phone_invalid: 'phone', email_invalid: 'email', date_required: 'preferred_date', date_invalid: 'preferred_date', message_required: 'message' }[out.error]);
       }
-      fail(out.error || 'server_error');
+      const code = out.error || 'server_error';
+      fail(code, RETRY_BY_MAIL.indexOf(code) > -1 ? p : null);
     } catch (err) {
       console.error(err);
-      fail('network');
+      fail('network', p);
     } finally {
       if (btn && btn.isConnected) { btn.disabled = false; btn.innerHTML = label; }
       if (turnstileId !== null && window.turnstile) window.turnstile.reset(turnstileId);
