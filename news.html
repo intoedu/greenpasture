@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>공지 · 소식 | 주식회사 그린파스처</title>
+<meta name="gp:title-en" content="News | Green Pasture Co., Ltd.">
+<meta name="description" content="그린파스처와 V-ZERO의 공지사항, 회사 소식, 기술 · 자료, 보도자료를 확인하세요.">
+<link rel="canonical" href="https://www.greenpasture.co.kr/news.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="그린파스처 Green Pasture">
+<meta property="og:title" content="공지 · 소식 | 그린파스처">
+<meta property="og:description" content="그린파스처와 V-ZERO의 새로운 소식">
+<meta property="og:url" content="https://www.greenpasture.co.kr/news.html">
+<meta property="og:image" content="https://www.greenpasture.co.kr/assets/img/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="assets/img/favicon-64.png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<meta name="theme-color" content="#080d1b">
+<script>(function(){var d=document.documentElement;d.classList.remove('no-js');try{var q=new URLSearchParams(location.search).get('lang');var l=q||localStorage.getItem('gp-lang');if(l==='en')d.lang='en';}catch(e){}})();</script>
+<link rel="stylesheet" href="assets/fonts/pretendard/pretendard.css">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">본문 바로가기</a>
+<div id="header-slot"></div>
+
+<main id="main">
+
+  <section class="page-hero">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="현재 위치">
+        <a href="index.html"><span data-lang="ko">홈</span><span data-lang="en">Home</span></a><span aria-hidden="true">/</span>
+        <a href="news.html"><span data-lang="ko">공지 · 소식</span><span data-lang="en">News</span></a>
+      </nav>
+      <span class="eyebrow">News &amp; Notice</span>
+      <h1 class="h1"><span data-lang="ko">공지 · 소식</span><span data-lang="en">News &amp; Notices</span></h1>
+      <p class="lead"><span data-lang="ko">그린파스처와 V-ZERO의 새로운 소식을 전해 드립니다.</span><span data-lang="en">The latest from Green Pasture and V-ZERO.</span></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+
+      <!-- 목록 -->
+      <div id="boardView">
+        <div class="board-tools">
+          <div class="tabs" id="boardTabs" role="group" aria-label="분류"></div>
+          <form class="search" id="boardSearch" role="search">
+            <label class="sr-only" for="searchWord">게시글 검색</label>
+            <input id="searchWord" type="search" data-ko-placeholder="제목 · 내용 검색" data-en-placeholder="Search posts" placeholder="제목 · 내용 검색" autocomplete="off">
+            <button type="submit" data-ko-label="검색" data-en-label="Search" aria-label="검색"><i data-icon="search"></i></button>
+          </form>
+        </div>
+        <div class="board" id="boardList" aria-live="polite"></div>
+        <nav class="pager" id="boardPager" aria-label="페이지"></nav>
+      </div>
+
+      <!-- 본문 -->
+      <article class="post" id="postView" hidden></article>
+
+      <noscript><p class="note">게시판을 보려면 브라우저의 자바스크립트를 켜 주세요. / Please enable JavaScript to view posts.</p></noscript>
+    </div>
+  </section>
+
+</main>
+
+<div id="footer-slot"></div>
+<script src="assets/data/posts.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/news.js"></script>
+</body>
+</html>

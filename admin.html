@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
+<!-- 이 화면에서 불러올 수 있는 곳을 제한합니다. Supabase 에 사용자 지정 도메인을 붙이면 connect-src 에 그 주소를 더하십시오. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' https://cdn.jsdelivr.net; font-src 'self' https://cdn.jsdelivr.net data:; img-src 'self' data:; connect-src 'self' https://*.supabase.co wss://*.supabase.co; object-src 'none'; base-uri 'none'; form-action 'self'">
+<title>온라인 문의 관리 | 그린파스처</title>
+<link rel="icon" type="image/png" href="assets/img/favicon-32.png">
+<link rel="stylesheet" href="assets/fonts/pretendard/pretendard.css">
+<link rel="stylesheet" href="assets/css/admin.css?v=1">
+</head>
+<body>
+
+<!-- ================= 연결 전 안내 ================= -->
+<div class="center" id="view-setup" hidden>
+  <section class="card notice">
+    <p class="brand"><span class="mark" aria-hidden="true"></span>GREEN PASTURE · V-ZERO</p>
+    <h1>아직 연결되지 않았습니다 — docs/SETUP.md 참고</h1>
+    <p class="lead" id="setup-msg">온라인 접수 데이터베이스(Supabase)가 아직 이 사이트에 연결되지 않았습니다.
+      저장소의 <code>docs/SETUP.md</code> 순서대로 설치한 뒤
+      <code>assets/js/config.js</code> 의 <code>SUPABASE_URL</code> 과 <code>SUPABASE_ANON_KEY</code> 를 채우면 이 화면이 로그인 화면으로 바뀝니다.</p>
+    <p class="fine">연결 전까지 홈페이지 문의 양식은 방문자의 메일 앱을 열어 대표 메일로 보내는 방식으로 동작합니다.</p>
+  </section>
+</div>
+
+<!-- ================= 로그인 ================= -->
+<div class="center" id="view-login" hidden>
+  <form class="card login" id="login-form" novalidate>
+    <p class="brand"><span class="mark" aria-hidden="true"></span>GREEN PASTURE · V-ZERO</p>
+    <h1>온라인 문의 관리</h1>
+    <p class="sub">주식회사 그린파스처 · 관리자 전용</p>
+    <div class="alert bad" id="login-msg" role="alert" hidden></div>
+    <label for="lg-email">이메일</label>
+    <input id="lg-email" type="email" autocomplete="username" required>
+    <label for="lg-pw">비밀번호</label>
+    <input id="lg-pw" type="password" autocomplete="current-password" required>
+    <button class="btn primary block" type="submit" id="lg-btn">로그인</button>
+    <p class="fine">계정은 대표 관리자가 발급합니다. 비밀번호를 잊으셨으면 대표 관리자에게 재설정을 요청하십시오.</p>
+  </form>
+</div>
+
+<!-- ================= 접수 목록 ================= -->
+<div id="view-main" hidden>
+  <header class="topbar">
+    <div class="in">
+      <p class="brand light"><span class="mark" aria-hidden="true"></span><span>그린파스처</span><b>온라인 문의 관리</b></p>
+      <div class="who"><b id="me-name"></b><span id="me-email"></span></div>
+      <button class="btn on-dark" type="button" id="btn-out">로그아웃</button>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="page-head">
+      <h1>접수 내역 <span class="new-total" id="new-total" hidden></span></h1>
+      <div class="actions">
+        <button class="btn" type="button" id="btn-refresh">새로고침</button>
+        <button class="btn primary" type="button" id="btn-csv">CSV 내보내기</button>
+      </div>
+    </div>
+
+    <nav class="tabs" id="kind-tabs" aria-label="접수 구분"></nav>
+
+    <div class="toolbar">
+      <label class="sr" for="f-q">검색</label>
+      <input class="search" id="f-q" type="search" placeholder="이름 · 회사명 · 이메일 · 연락처 검색" autocomplete="off">
+      <label class="sr" for="f-status">처리 상태</label>
+      <select id="f-status"></select>
+      <button class="btn" type="button" id="btn-reset">초기화</button>
+    </div>
+
+    <div class="alert bad" id="main-msg" role="alert" hidden></div>
+
+    <section class="list" aria-live="polite">
+      <table>
+        <thead><tr>
+          <th scope="col">접수일시</th>
+          <th scope="col">구분</th>
+          <th scope="col">회사명</th>
+          <th scope="col">이름</th>
+          <th scope="col" class="c-tel">연락처</th>
+          <th scope="col" class="c-mail">이메일</th>
+          <th scope="col" class="c-topic">관심 제품 · 희망일</th>
+          <th scope="col">상태</th>
+        </tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <p class="empty" id="empty" hidden>조건에 맞는 접수가 없습니다.</p>
+      <div class="pager">
+        <button class="btn" type="button" id="pg-prev">이전</button>
+        <span id="pg-info">–</span>
+        <button class="btn" type="button" id="pg-next">다음</button>
+      </div>
+    </section>
+
+    <p class="foot">이 화면의 조회·열람·수정·내보내기·삭제는 모두 열람 기록으로 남습니다. 공용 PC에서는 사용 후 반드시 로그아웃하십시오.</p>
+  </main>
+</div>
+
+<!-- ================= 상세 ================= -->
+<div class="veil" id="veil" hidden></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="d-title" hidden>
+  <header class="d-head">
+    <div class="d-titles">
+      <p class="d-tags" id="d-tags"></p>
+      <h2 id="d-title">접수 상세</h2>
+      <p class="d-sub" id="d-sub"></p>
+    </div>
+    <button class="x" type="button" id="d-close" aria-label="닫기">×</button>
+  </header>
+  <div class="d-body" id="d-body"></div>
+</aside>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/config.js?v=1"></script>
+<script src="assets/js/admin.js?v=1"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+# 홈페이지 자동 배포 (GitHub Pages)
+# main 브랜치에 변경이 올라가면 1~2분 안에 웹사이트가 자동으로 갱신됩니다.
+# 홈페이지에 필요한 파일만 골라 올립니다. (docs/, supabase/ 등 작업용 파일은 웹에 올라가지 않습니다)
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: 소스 내려받기
+        uses: actions/checkout@v4
+
+      - name: 배포할 파일만 모으기
+        run: |
+          mkdir -p _site
+          cp ./*.html robots.txt sitemap.xml .nojekyll _site/
+          cp -r assets _site/
+          if [ -f CNAME ]; then cp CNAME _site/; fi
+          echo "배포 파일 목록:"; find _site -maxdepth 2 -type f | sort
+
+      - name: Pages 설정 (없으면 자동 활성화)
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: 사이트 파일 업로드
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: 배포
+        id: deployment
+        uses: actions/deploy-pages@v4
