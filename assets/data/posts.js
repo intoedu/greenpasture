@@ -37,11 +37,11 @@ window.GP_POSTS = [
     body: {
       ko: `
 <p>안녕하십니까. 주식회사 그린파스처입니다.</p>
-<p>나노 촉매 코팅 <strong>V-ZERO</strong>를 더 많은 분께 정확하게 소개하기 위해 홈페이지를 새롭게 열었습니다.</p>
+<p>촉매 코팅 <strong>V-ZERO</strong>를 더 많은 분께 정확하게 소개하기 위해 홈페이지를 새롭게 열었습니다.</p>
 <h3>홈페이지에서 확인하실 수 있는 내용</h3>
 <ul>
   <li><a href="business.html#technology">핵심 기술</a> — 가시광 · 무광(암촉매) · 열촉매 3중 작동 원리</li>
-  <li><a href="business.html#products">제품 라인업</a> — 오리지널 원액, 프리미엄 에어 필터, 안심 시공 케어</li>
+  <li><a href="business.html#products">제품 라인업</a> — 오리지널 원액, 프리미엄 에어 필터(해외용), 안심 시공 케어</li>
   <li><a href="business.html#performance">시험 · 실증 데이터</a> — 항균 · 항바이러스 · 탈취 시험 결과 요약</li>
   <li><a href="apply.html">신청 · 예약</a> — 견적 요청, 샘플 신청, 시공 상담 · 현장 방문 예약, 파트너 신청</li>
 </ul>
@@ -49,11 +49,11 @@ window.GP_POSTS = [
 <p>감사합니다.</p>`,
       en: `
 <p>Thank you for visiting Green Pasture Co., Ltd.</p>
-<p>We have launched our new website to introduce <strong>V-ZERO</strong>, our nano-catalyst coating, more clearly to customers and partners.</p>
+<p>We have launched our new website to introduce <strong>V-ZERO</strong>, our catalyst coating, more clearly to customers and partners.</p>
 <h3>What you can find here</h3>
 <ul>
   <li><a href="business.html#technology">Technology</a> — how visible-light, lightless (dark) and thermal catalysis work together</li>
-  <li><a href="business.html#products">Products</a> — Original solution, Premium air filter, and Professional coating care</li>
+  <li><a href="business.html#products">Products</a> — Original solution, Premium air filter (overseas), and Professional coating care</li>
   <li><a href="business.html#performance">Test data</a> — a summary of antibacterial, antiviral and deodorization tests</li>
   <li><a href="apply.html">Requests</a> — quotes, samples, on-site consultations and partnership applications</li>
 </ul>
@@ -75,21 +75,21 @@ window.GP_POSTS = [
     },
     body: {
       ko: `
-<p>그린파스처는 V-ZERO 나노 촉매 기술로 비즈니스의 영토를 함께 넓혀갈 <strong>산업별 파트너</strong>를 모십니다.</p>
+<p>그린파스처는 V-ZERO 촉매 기술로 비즈니스의 영토를 함께 넓혀갈 <strong>산업별 파트너</strong>를 모십니다.</p>
 <h3>모집 분야</h3>
 <ol>
   <li><strong>생활가전</strong> — 공기청정기 · 에어컨 · 의류관리기 등의 필터와 내부 부품 적용</li>
   <li><strong>건설자재</strong> — 벽지 · 바닥재 · 페인트 · 환기 시스템 등 마감재 적용</li>
   <li><strong>병원 · 의료</strong> — 병동 · 수술실 · 요양시설 표면과 의료기기 표면 시공</li>
   <li><strong>자동차 · 모빌리티</strong> — 공조 필터, 시트 · 핸들 등 다중이용 모빌리티 내장재</li>
-  <li><strong>섬유 · 플라스틱 · 목재 · 금속</strong> — 소재 나노코팅, 화장품 용기 · 뷰티 디바이스</li>
+  <li><strong>섬유 · 플라스틱 · 목재 · 금속</strong> — 소재 코팅, 화장품 용기 · 뷰티 디바이스</li>
   <li><strong>공공조달</strong> — 학교 · 지하철 · 관공서 등 공공시설 위생 관리</li>
   <li><strong>글로벌 B2B 네트워크</strong> — 해외 대리점 · 에이전트</li>
 </ol>
 <p>대리점 · 시공점 · OEM 공급 등 협력 형태는 분야와 지역에 따라 협의합니다.</p>
 <p><a class="btn btn--primary" href="apply.html?type=partner">파트너 신청하기</a></p>`,
       en: `
-<p>Green Pasture is looking for <strong>industry partners</strong> to grow together with V-ZERO nano-catalyst technology.</p>
+<p>Green Pasture is looking for <strong>industry partners</strong> to grow together with V-ZERO catalyst technology.</p>
 <h3>Partnership areas</h3>
 <ol>
   <li><strong>Home appliances</strong> — filters and internal parts of air purifiers, air conditioners and clothing care</li>
@@ -124,7 +124,7 @@ window.GP_POSTS = [
 <ul>
   <li>제품 개요 및 핵심 사양</li>
   <li>기술 원리 — 가시광 · 무광 · 열촉매 3중 활성산소(ROS) 메커니즘</li>
-  <li>무기 나노바인더 원천기술 (SNB 기술)</li>
+  <li>무기 바인더 원천기술 (SNB 기술)</li>
   <li>성능 실증 데이터 — 항균 · 항바이러스 · 탈취, ATP 오염도 측정</li>
   <li>적용 분야별 활용 예시</li>
   <li>시공 사전 준비, 공정 흐름, 기재별 시공 기준표</li>
@@ -139,7 +139,7 @@ window.GP_POSTS = [
 <ul>
   <li>Product overview and key specifications</li>
   <li>Technology — visible-light, lightless and thermal catalysis (triple ROS mechanism)</li>
-  <li>Inorganic nano-binder technology (SNB)</li>
+  <li>Inorganic binder technology (SNB)</li>
   <li>Test data — antibacterial, antiviral, deodorization and ATP contamination measurements</li>
   <li>Application examples by sector</li>
   <li>Preparation, process flow and application standards by substrate</li>
@@ -165,22 +165,22 @@ window.GP_POSTS = [
     },
     body: {
       ko: `
-<p>기존 산화티타늄(TiO₂) 광촉매는 주로 <strong>자외선(UV)</strong>이 있어야 작동했습니다. 실내조명 아래나 밤에는 효과를 기대하기 어려웠던 이유입니다.</p>
-<p>V-ZERO는 산화텅스텐(WO₃)을 중심으로 나노 백금(Nano-Pt), 실리카(SiO₂) 등을 조합해 <strong>세 가지 경로</strong>로 작동하도록 설계되었습니다.</p>
+<p>기존 광촉매는 주로 <strong>자외선(UV)</strong>이 있어야 작동했습니다. 실내조명 아래나 밤에는 효과를 기대하기 어려웠던 이유입니다.</p>
+<p>V-ZERO는 여러 촉매를 조합해 <strong>세 가지 경로</strong>로 작동하도록 설계되었습니다.</p>
 <ol>
   <li><strong>가시광 촉매</strong> — 일반 실내조명(약 500lux) 수준의 빛으로 활성산소(ROS)를 만듭니다.</li>
-  <li><strong>무광 촉매(암촉매)</strong> — 나노 백금이 빛이 없는 환경에서도 공기 중 산소 · 수분과 반응하도록 설계되었습니다.</li>
+  <li><strong>무광 촉매(암촉매)</strong> — 무광 촉매가 빛이 없는 환경에서도 공기 중 산소 · 수분과 반응하도록 설계되었습니다.</li>
   <li><strong>열촉매</strong> — 온도 조건에 따라 일산화탄소 등 유해가스의 산화 반응을 돕습니다.</li>
 </ol>
 <p>이렇게 만들어진 활성산소는 표면에 닿은 세균 · 바이러스 · 냄새 분자를 산화 분해하는 방식으로 작용합니다.</p>
 <p class="tiny">※ 제조사 기술 자료를 요약한 내용이며, 실제 효과는 사용 환경(조도 · 온도 · 습도 · 오염도)에 따라 다를 수 있습니다.</p>
 <p><a class="btn btn--primary" href="business.html#technology">기술 자세히 보기</a></p>`,
       en: `
-<p>Conventional titanium dioxide (TiO₂) photocatalysts mainly require <strong>ultraviolet (UV) light</strong>, which is why they work poorly under indoor lighting or at night.</p>
-<p>V-ZERO combines tungsten trioxide (WO₃) with nano-platinum (Nano-Pt), silica (SiO₂) and other components, and is designed to work through <strong>three pathways</strong>.</p>
+<p>Conventional photocatalysts mainly require <strong>ultraviolet (UV) light</strong>, which is why they work poorly under indoor lighting or at night.</p>
+<p>V-ZERO combines several catalysts and is designed to work through <strong>three pathways</strong>.</p>
 <ol>
   <li><strong>Visible-light catalysis</strong> — generates reactive oxygen species (ROS) under ordinary indoor lighting (approx. 500 lux).</li>
-  <li><strong>Lightless (dark) catalysis</strong> — nano-platinum is designed to react with oxygen and moisture in the air even without light.</li>
+  <li><strong>Lightless (dark) catalysis</strong> — the lightless catalyst is designed to react with oxygen and moisture in the air even without light.</li>
   <li><strong>Thermal catalysis</strong> — assists the oxidation of harmful gases such as carbon monoxide under suitable temperatures.</li>
 </ol>
 <p>The resulting ROS act by oxidizing bacteria, viruses and odor molecules that come into contact with the surface.</p>

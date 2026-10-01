@@ -252,8 +252,8 @@ function buildFooter() {
     <div class="footer__brand">
       ${logoHtml()}
       <p class="footer__desc">
-        <span data-lang="ko">나노 촉매 코팅 V-ZERO로 사람이 숨 쉬고 머무는 공간을 더 깨끗하게 가꾸어 갑니다.</span>
-        <span data-lang="en">With V-ZERO nano-catalyst coating, we help keep the spaces where people live and breathe cleaner.</span>
+        <span data-lang="ko">촉매 코팅 V-ZERO로 사람이 숨 쉬고 머무는 공간을 더 깨끗하게 가꾸어 갑니다.</span>
+        <span data-lang="en">With V-ZERO catalyst coating, we help keep the spaces where people live and breathe cleaner.</span>
       </p>
       ${snsHtml()}
     </div>
@@ -802,7 +802,7 @@ function initMotion() {
     }
     requestAnimationFrame(frame);
   }
-  const counters = document.querySelectorAll('.spec__value, .bar__head > b, [data-countup]');
+  const counters = document.querySelectorAll('.spec__value:not([data-nocount]), .bar__head > b, [data-countup]');
   if (counters.length && 'IntersectionObserver' in window) {
     const io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
