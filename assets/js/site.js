@@ -533,6 +533,26 @@ function initSubnav() {
     const sec = document.getElementById(a.getAttribute('href').slice(1));
     if (sec) map.set(sec, a);
   });
+  // 휴대폰에서는 탭 줄이 화면보다 길어 '지금 탭'이 보이도록 가로로 옮겨야 합니다.
+  // 페이지가 움직이는 동안 다른 스크롤을 건드리면 (특히 아이폰 · 갤럭시에서) 페이지 스크롤이
+  // 끊기거나 멈추므로, 스크롤이 완전히 멈춘 뒤에 한 번만 즉시 옮깁니다.
+  // (scrollIntoView · smooth 스크롤은 쓰지 않습니다)
+  let pending = null, settle = 0;
+  function alignTab() {
+    const a = pending; pending = null;
+    if (!a) return;
+    const list = a.parentElement;
+    if (!list || list.scrollWidth <= list.clientWidth) return;
+    const lr = list.getBoundingClientRect(), ar = a.getBoundingClientRect();
+    if (ar.left >= lr.left + 8 && ar.right <= lr.right - 8) return;   // 이미 보이면 그대로
+    list.scrollLeft = Math.max(0, list.scrollLeft + (ar.left - lr.left) - (lr.width - ar.width) / 2);
+  }
+  function waitForStop() {
+    clearTimeout(settle);
+    settle = setTimeout(alignTab, 220);
+  }
+  window.addEventListener('scroll', function () { if (pending) waitForStop(); }, { passive: true });
+
   const io = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (!entry.isIntersecting) return;
@@ -540,13 +560,8 @@ function initSubnav() {
       const a = map.get(entry.target);
       if (a) {
         a.classList.add('is-active');
-        // 탭 줄만 가로로 옮깁니다. (scrollIntoView 는 페이지 전체 스크롤을 끊어 먹어서 쓰지 않습니다)
-        const list = a.parentElement;
-        if (list && list.scrollWidth > list.clientWidth) {
-          const lr = list.getBoundingClientRect(), ar = a.getBoundingClientRect();
-          const left = list.scrollLeft + (ar.left - lr.left) - (lr.width - ar.width) / 2;
-          list.scrollTo({ left: Math.max(0, left), behavior: 'smooth' });
-        }
+        pending = a;
+        waitForStop();
       }
     });
   }, { rootMargin: '-45% 0px -50% 0px' });
@@ -610,6 +625,29 @@ function initMaps() {
 }
 
 /* =========================================================
+ * 12-C. 다른 페이지에서 '#구역' 주소로 들어왔을 때 위치 바로잡기
+ *       글꼴 · 사진이 늦게 들어와 위쪽 높이가 바뀌면 목표 구역이 조금 어긋납니다.
+ *       방문자가 아직 직접 움직이지 않았을 때만, 다 불러온 뒤 한 번 맞춥니다.
+ * ========================================================= */
+function initHashLanding() {
+  const id = decodeURIComponent((location.hash || '').slice(1));
+  if (!id) return;
+  let touched = false;
+  ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(function (t) {
+    window.addEventListener(t, function () { touched = true; }, { passive: true, once: true });
+  });
+  function align() {
+    const el = document.getElementById(id);
+    if (!el || touched) return;
+    const pad = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+    const delta = el.getBoundingClientRect().top - pad;
+    if (Math.abs(delta) > 8) window.scrollTo({ top: window.scrollY + delta, behavior: 'instant' });
+  }
+  const ready = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+  window.addEventListener('load', function () { ready.then(function () { setTimeout(align, 120); setTimeout(align, 700); }); });
+}
+
+/* =========================================================
  * 13. 메인 첫 화면 — 입자 네트워크 배경 (브로슈어의 별빛 연결망)
  * ========================================================= */
 function initHeroCanvas() {
@@ -618,6 +656,15 @@ function initHeroCanvas() {
   const ctx = canvas.getContext('2d');
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let w = 0, h = 0, dpr = 1, points = [], running = true, raf = 0;
+  const mouse = { x: -9999, y: -9999 };
+  const hero = canvas.closest('.hero');
+  if (hero && !reduce) {
+    hero.addEventListener('pointermove', function (e) {
+      const r = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+    }, { passive: true });
+    hero.addEventListener('pointerleave', function () { mouse.x = mouse.y = -9999; });
+  }
 
   function resize() {
     dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -654,6 +701,14 @@ function initHeroCanvas() {
           ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
         }
       }
+      // 마우스 가까이 있는 입자는 선으로 이어지고 살짝 끌려옵니다
+      const mx = mouse.x - p.x, my = mouse.y - p.y, md = Math.sqrt(mx * mx + my * my);
+      if (md < 180) {
+        ctx.strokeStyle = 'rgba(125, 211, 252,' + (0.42 * (1 - md / 180)).toFixed(3) + ')';
+        ctx.lineWidth = 0.8;
+        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
+        if (!reduce) { p.x += mx * 0.0025; p.y += my * 0.0025; }
+      }
       const a = 0.45 + Math.sin(p.t) * 0.3;
       ctx.fillStyle = 'rgba(186, 230, 253,' + a.toFixed(3) + ')';
       ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
@@ -682,6 +737,27 @@ function initMotion() {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   if (reduce) return;
+
+  // ⓪ 첫 화면 제목을 단어로 나눠 하나씩 떠오르게 (글자는 그대로, 감싸기만 함)
+  document.querySelectorAll('.hero h1 [data-lang]').forEach(function (block) {
+    let i = 0;
+    block.querySelectorAll('.line').forEach(function (line) {
+      Array.from(line.childNodes).forEach(function (node) {
+        if (node.nodeType === 1) { node.classList.add('w'); node.style.setProperty('--i', i++); return; }
+        if (node.nodeType !== 3) return;
+        const frag = document.createDocumentFragment();
+        node.nodeValue.split(/(\s+)/).forEach(function (part) {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+          const w = document.createElement('span');
+          w.className = 'w'; w.textContent = part; w.style.setProperty('--i', i++);
+          frag.appendChild(w);
+        });
+        line.replaceChild(frag, node);
+      });
+    });
+    block.closest('h1').classList.add('is-split');
+  });
 
   // ① 숫자가 0부터 올라가는 효과 — 핵심 수치, 막대 그래프 머리의 숫자
   const NUM = /\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?/g;
@@ -762,6 +838,8 @@ function initMotion() {
       if (!raf) raf = requestAnimationFrame(function () {
         visual.style.setProperty('--px', px.toFixed(3));
         visual.style.setProperty('--py', py.toFixed(3));
+        hero.style.setProperty('--hx', ((px + 0.5) * 100).toFixed(1) + '%');
+        hero.style.setProperty('--hy', ((py + 0.5) * 100).toFixed(1) + '%');
         raf = 0;
       });
     });
@@ -903,6 +981,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initFilters();
   initSubnav();
   initMaps();
+  initHashLanding();
   updateSmsLinks();
   initKakaoLinks();
   initHeroCanvas();

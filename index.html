@@ -27,7 +27,7 @@
 <meta name="theme-color" content="#080d1b">
 <script>(function(){var d=document.documentElement;d.classList.remove('no-js');try{var q=new URLSearchParams(location.search).get('lang');var l=q||localStorage.getItem('gp-lang');if(l==='en')d.lang='en';}catch(e){}})();</script>
 <link rel="stylesheet" href="assets/fonts/pretendard/pretendard.css">
-<link rel="stylesheet" href="assets/css/style.css?v=2">
+<link rel="stylesheet" href="assets/css/style.css?v=3">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -80,7 +80,19 @@
         </div>
       </div>
       <div class="hero__visual">
+        <!-- 엠블럼 주위: 퍼져 나가는 파동 · 도는 궤도와 입자 (장식) -->
+        <div class="hero__fx" aria-hidden="true">
+          <span class="wave"></span><span class="wave"></span><span class="wave"></span>
+          <span class="orbit orbit--a"><span class="orbit__ring"><i></i></span></span>
+          <span class="orbit orbit--b"><span class="orbit__ring"><i></i><i></i></span></span>
+          <span class="orbit orbit--c"><span class="orbit__ring"><i></i></span></span>
+        </div>
         <img class="hero__emblem" src="assets/img/vzero-emblem.jpg" alt="V-ZERO 엠블럼" width="1400" height="1062" fetchpriority="high">
+        <ul class="hero__chips" aria-hidden="true">
+          <li class="chip chip--1"><i data-icon="sun"></i><span data-lang="ko">가시광 촉매</span><span data-lang="en">Visible-light catalyst</span></li>
+          <li class="chip chip--2"><i data-icon="moon"></i><span data-lang="ko">무광 촉매</span><span data-lang="en">Low-light catalyst</span></li>
+          <li class="chip chip--3"><i data-icon="layers"></i><span data-lang="ko">50–150nm 초박막</span><span data-lang="en">50–150nm ultra-thin film</span></li>
+        </ul>
       </div>
     </div>
     <span class="hero__scroll" aria-hidden="true">Scroll</span>
@@ -442,7 +454,7 @@
 </main>
 
 <div id="footer-slot"></div>
-<script src="assets/data/posts.js?v=2"></script>
-<script src="assets/js/site.js?v=2"></script>
+<script src="assets/data/posts.js?v=3"></script>
+<script src="assets/js/site.js?v=3"></script>
 </body>
 </html>
