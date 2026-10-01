@@ -715,7 +715,10 @@ h3.message__quote { word-break: keep-all; }
 .data-table td.col-hl { font-weight: 700; color: var(--blue-700); }
 .data-table .src { font-size: 13px; color: var(--muted); }
 
-.binder { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.badge--export { display: inline-flex; align-items: center; gap: 6px; background: #fff7ed; color: #c2410c; border-color: #fed7aa; }
+.badge--export svg { width: 14px; height: 14px; }
+.h3__note, .product__note { font-size: .62em; font-weight: 700; color: #c2410c; letter-spacing: 0; vertical-align: middle; }
+.binder { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .binder .card { padding: 26px; }
 .binder__value { font-size: 28px; font-weight: 800; letter-spacing: -0.03em; color: var(--blue-600); line-height: 1.1; }
 .binder__value small { font-size: 14px; font-weight: 700; margin-left: 2px; }
@@ -1433,7 +1436,7 @@ a.contact-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); b
   .faq-cats { position: static; display: flex; flex-wrap: wrap; gap: 8px; }
   .faq-cats button { border: 1px solid var(--line); border-radius: 999px; padding: 9px 16px; font-size: 14px; }
   .aside-card { position: static; }
-  .grid--4, .values, .binder, .conditions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid--4, .values, .conditions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .contact-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .grid--3, .apps, .apps--4, .news-list, .paths, .leaders, .sectors { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .section__head--split { flex-direction: column; align-items: flex-start; }
