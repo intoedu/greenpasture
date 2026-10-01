@@ -21,16 +21,23 @@ const SITE = {
   nameEn: 'Green Pasture Co., Ltd.',
   shortKo: '그린파스처',
   shortEn: 'Green Pasture',
-  ceoKo: '송창근 · 박건식 (공동대표)',
-  ceoEn: 'Song Chang-geun · Park Geon-sik (Co-CEOs)',
+  ceoKo: '송창근 · 박건식',
+  ceoEn: 'Song Chang-geun · Park Geon-sik',
   tel: '010-3497-2524',
-  telHref: '01034972524',
+  telEn: '+82 10-3497-2524',     // 해외 방문자용 표기
+  telHref: '+821034972524',      // 국내 · 해외 어디서 눌러도 연결되는 국제 형식
   email: 'ceo@greenpasture.co.kr',
+  // 문자 버튼을 누르면 미리 채워지는 문구
+  smsKo: '[그린파스처 홈페이지 문의]\n성함:\n회사:\n문의 내용:',
+  smsEn: '[Green Pasture website inquiry]\nName:\nCompany:\nMessage:',
+  // 카카오톡 채널 1:1 채팅 주소 (예: 'https://pf.kakao.com/_xxxx/chat') — 넣으면 카톡 상담 버튼이 나타납니다
+  kakaoChat: '',
   addressKo: '경기도 광주시 곤지암읍 벌열미길 39-14',
   addressEn: '39-14, Beoryeolmi-gil, Gonjiam-eup, Gwangju-si, Gyeonggi-do, Republic of Korea',
-  hoursKo: '평일 09:00 – 18:00 (주말·공휴일 휴무)',
-  hoursEn: 'Weekdays 09:00 – 18:00 KST',
-  bizNo: '',        // 사업자등록번호 — 받으면 입력하세요 (예: '123-45-67890')
+  // 응대 시간 · 사업자등록번호 · 설립일은 확인되면 입력하세요. 비어 있으면 공개 화면에 나오지 않습니다.
+  hoursKo: '',      // 예: '평일 09:00 – 18:00 (주말 · 공휴일 휴무)'
+  hoursEn: '',      // 예: 'Mon–Fri 09:00–18:00 KST (closed weekends & public holidays)'
+  bizNo: '384-87-04017',   // 사업자등록증(2026-06-05 발급) 기준
   sites: ['www.greenpasture.co.kr', 'www.vzero.co.kr'],
   // SNS 주소를 넣으면 푸터에 아이콘이 나타납니다. 비워두면 표시되지 않습니다.
   sns: {
@@ -53,7 +60,7 @@ const NAV_ITEMS = [
     href: 'about.html', ko: '회사 소개', en: 'About',
     children: [
       { href: 'about.html#story',         ko: '브랜드 스토리',   en: 'Brand Story' },
-      { href: 'about.html#message',       ko: 'CEO 인사말',     en: 'CEO Message' },
+      { href: 'about.html#message',       ko: '대표 인사말',     en: 'CEO Message' },
       { href: 'about.html#leadership',    ko: '경영진',         en: 'Leadership' },
       { href: 'about.html#overview',      ko: '회사 개요',       en: 'Company Overview' },
       { href: 'about.html#certification', ko: '인증 · 특허',     en: 'Certifications' },
@@ -84,6 +91,7 @@ const S = 'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1
 const ICON = {
   phone: `<svg ${S}><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>`,
   mail: `<svg ${S}><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>`,
+  sms: `<svg ${S}><path d="M21 12a8 8 0 0 1-11.6 7.1L4 21l1.9-5.4A8 8 0 1 1 21 12Z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg>`,
   pin: `<svg ${S}><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>`,
   clock: `<svg ${S}><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>`,
   globe: `<svg ${S}><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>`,
@@ -91,6 +99,8 @@ const ICON = {
   chevron: `<svg ${S}><path d="m6 9 6 6 6-6"/></svg>`,
   top: `<svg ${S} stroke-width="2"><path d="m6 15 6-6 6 6"/></svg>`,
   search: `<svg ${S}><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>`,
+  zoom: `<svg ${S}><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg>`,
+  close: `<svg ${S} stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg>`,
   link: `<svg ${S}><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>`,
   share: `<svg ${S}><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>`,
   doc: `<svg ${S}><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>`,
@@ -144,7 +154,7 @@ const SNS_LABEL = {
 /* 로고 — 원본 로고 파일을 받으면 assets/img/logo-gp.png 를 같은 이름으로 교체하세요 */
 function logoHtml() {
   return `
-  <a class="brand" href="index.html" aria-label="${SITE.nameKo} 홈">
+  <a class="brand" href="index.html" aria-label="${SITE.nameKo} 홈" data-ko-label="${SITE.nameKo} 홈" data-en-label="${SITE.nameEn} home">
     <img class="brand__mark" src="assets/img/logo-gp.png" alt="" width="155" height="110">
     <span class="brand__text">
       <span class="brand__ko"><span data-lang="ko">${SITE.shortKo}</span><span data-lang="en">${SITE.shortEn}</span></span>
@@ -183,31 +193,36 @@ function buildHeader() {
 <header class="site-header" id="siteHeader">
   <div class="wrap">
     ${logoHtml()}
-    <nav class="nav" id="mainNav" aria-label="주 메뉴">
+    <nav class="nav" id="mainNav" aria-label="주 메뉴" data-ko-label="주 메뉴" data-en-label="Main menu">
       <ul class="nav__list">${items}</ul>
       <div class="nav__mobile-extra">
-        <div class="lang-toggle" role="group" aria-label="언어 선택 / Language">
+        <div class="lang-toggle" role="group" aria-label="언어 선택 / Language" data-ko-label="언어 선택" data-en-label="Language">
           <button type="button" data-set-lang="ko">KOR</button>
           <button type="button" data-set-lang="en">ENG</button>
         </div>
         <a class="btn btn--primary" href="apply.html?type=quote">
           <span data-lang="ko">견적 요청하기</span><span data-lang="en">Request a Quote</span>${ICON.arrow}
         </a>
+        <div class="nav__reach">
+          <a class="btn btn--line-dark btn--sm" href="tel:${SITE.telHref}">${ICON.phone}<span data-lang="ko">전화</span><span data-lang="en">Call</span></a>
+          <a class="btn btn--line-dark btn--sm only-touch" href="#" data-sms>${ICON.sms}<span data-lang="ko">문자</span><span data-lang="en">Text</span></a>
+          ${SITE.kakaoChat ? `<a class="btn btn--kakao btn--sm" href="${SITE.kakaoChat}" target="_blank" rel="noopener">${ICON.kakao}<span data-lang="ko">카톡 상담</span><span data-lang="en">KakaoTalk</span></a>` : ''}
+        </div>
         <div class="contact">
-          <a href="tel:${SITE.telHref}">${SITE.tel}</a>
+          <a href="tel:${SITE.telHref}"><span data-lang="ko">${SITE.tel}</span><span data-lang="en">${SITE.telEn}</span></a>
           <a href="mailto:${SITE.email}">${SITE.email}</a>
         </div>
       </div>
     </nav>
     <div class="header__actions">
-      <div class="lang-toggle" role="group" aria-label="언어 선택 / Language">
+      <div class="lang-toggle" role="group" aria-label="언어 선택 / Language" data-ko-label="언어 선택" data-en-label="Language">
         <button type="button" data-set-lang="ko">KOR</button>
         <button type="button" data-set-lang="en">ENG</button>
       </div>
       <a class="btn btn--primary btn--sm" href="apply.html?type=quote">
         <span data-lang="ko">견적 요청</span><span data-lang="en">Get a Quote</span>
       </a>
-      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="메뉴 열기">
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="메뉴 열기" data-ko-label="메뉴 열기" data-en-label="Open menu">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -218,8 +233,8 @@ function buildHeader() {
 function snsHtml() {
   const keys = Object.keys(SITE.sns).filter(function (k) { return SITE.sns[k]; });
   if (!keys.length) {
-    return `<div class="sns"><span class="sns__pending" data-tbd="SNS 채널 주소(인스타그램·유튜브·블로그·카카오톡 채널 등)를 받으면 site.js 의 SITE.sns 에 입력하세요.">
-      <span data-lang="ko">SNS 채널 준비 중</span><span data-lang="en">Social channels coming soon</span></span></div>`;
+    // 주소가 하나도 없으면 공개 화면에는 아무것도 보이지 않고, 검토 모드에서만 자리가 표시됩니다
+    return `<div class="sns tbd-only"><span class="sns__pending" data-tbd="SNS 채널 주소(인스타그램 · 유튜브 · 블로그 · 카카오톡 채널 등)를 받으면 site.js 의 SITE.sns 에 입력하세요.">SNS</span></div>`;
   }
   return `<div class="sns">${keys.map(function (k) {
     return `<a href="${SITE.sns[k]}" target="_blank" rel="noopener" aria-label="${SNS_LABEL[k]}" title="${SNS_LABEL[k]}">${ICON[k]}</a>`;
@@ -244,22 +259,22 @@ function buildFooter() {
     </div>
     <div class="footer__col">
       <h4>Menu</h4>
-      <nav class="footer__links" aria-label="푸터 메뉴">${menu}</nav>
+      <nav class="footer__links" aria-label="푸터 메뉴" data-ko-label="푸터 메뉴" data-en-label="Footer menu">${menu}</nav>
     </div>
     <div class="footer__col">
       <h4>Business</h4>
-      <nav class="footer__links" aria-label="사업 안내">${biz}</nav>
+      <nav class="footer__links" aria-label="사업 안내" data-ko-label="사업 안내" data-en-label="Business">${biz}</nav>
     </div>
     <div class="footer__col">
       <h4>Contact</h4>
       <div class="footer__info">
-        <span><b>T.</b><a href="tel:${SITE.telHref}">${SITE.tel}</a></span>
+        <span><b>T.</b><a href="tel:${SITE.telHref}"><span data-lang="ko">${SITE.tel}</span><span data-lang="en">${SITE.telEn}</span></a></span>
         <span><b>E.</b><a href="mailto:${SITE.email}">${SITE.email}</a></span>
         <span data-lang="ko"><b>A.</b>${SITE.addressKo}</span>
         <span data-lang="en"><b>A.</b>${SITE.addressEn}</span>
-        <span data-tbd="운영 시간은 임시값입니다. 실제 응대 시간을 확인하세요.">
-          <span data-lang="ko"><b>H.</b>${SITE.hoursKo}</span><span data-lang="en"><b>H.</b>${SITE.hoursEn}</span>
-        </span>
+        ${SITE.hoursKo
+          ? `<span><span data-lang="ko"><b>H.</b>${SITE.hoursKo}</span><span data-lang="en"><b>H.</b>${SITE.hoursEn || SITE.hoursKo}</span></span>`
+          : `<span class="tbd-only" data-tbd="응대 시간을 받으면 site.js 의 SITE.hoursKo · hoursEn 에 입력하세요."><b>H.</b>(응대 시간)</span>`}
         <span><b>W.</b>${SITE.sites.join(' · ')}</span>
       </div>
     </div>
@@ -267,13 +282,13 @@ function buildFooter() {
   <div class="wrap footer__bottom">
     <p class="footer__biz">
       <span data-lang="ko">${SITE.nameKo}</span><span data-lang="en">${SITE.nameEn}</span>
-      <span data-lang="ko">대표 ${SITE.ceoKo}</span><span data-lang="en">${SITE.ceoEn}</span>
+      <span data-tbd="사업자등록증의 대표자는 송창근 1인입니다. 박건식 대표의 대표이사 등기 여부를 확인한 뒤 '공동대표' 표기를 정하세요."><span data-lang="ko">공동대표 ${SITE.ceoKo}</span><span data-lang="en">Co-CEOs ${SITE.ceoEn}</span></span>
       ${SITE.bizNo
         ? `<span><span data-lang="ko">사업자등록번호</span><span data-lang="en">Business Reg. No.</span> ${SITE.bizNo}</span>`
-        : `<span data-tbd="사업자등록번호를 받으면 site.js 의 SITE.bizNo 에 입력하세요."><span data-lang="ko">사업자등록번호 (확인 후 기재)</span><span data-lang="en">Business Reg. No. (TBA)</span></span>`}
+        : `<span class="tbd-only" data-tbd="사업자등록번호를 받으면 site.js 의 SITE.bizNo 에 입력하세요.">사업자등록번호 (확인 후 기재)</span>`}
       <br>© ${year} ${SITE.nameEn} All rights reserved.
     </p>
-    <nav aria-label="정책">
+    <nav aria-label="정책" data-ko-label="정책" data-en-label="Policies">
       <a class="is-strong" href="privacy.html"><span data-lang="ko">개인정보처리방침</span><span data-lang="en">Privacy Policy</span></a>
       <a href="contact.html"><span data-lang="ko">문의하기</span><span data-lang="en">Contact</span></a>
     </nav>
@@ -281,9 +296,11 @@ function buildFooter() {
 </footer>
 
 <div class="quick">
-  <a class="quick__cta" href="contact.html" aria-label="문의하기 / Contact">${ICON.mail}</a>
-  <a href="tel:${SITE.telHref}" aria-label="전화 문의 / Call">${ICON.phone}</a>
-  <button type="button" class="quick__top" id="toTop" aria-label="맨 위로 / Back to top">${ICON.top}</button>
+  ${SITE.kakaoChat ? `<a class="quick__kakao" href="${SITE.kakaoChat}" target="_blank" rel="noopener" aria-label="카카오톡 상담" data-ko-label="카카오톡 상담" data-en-label="Chat on KakaoTalk">${ICON.kakao}</a>` : ''}
+  <a class="only-touch" href="#" data-sms aria-label="문자 문의" data-ko-label="문자 문의" data-en-label="Send a text">${ICON.sms}</a>
+  <a class="quick__cta" href="contact.html" aria-label="문의하기" data-ko-label="문의하기" data-en-label="Contact us">${ICON.mail}</a>
+  <a href="tel:${SITE.telHref}" aria-label="전화 문의" data-ko-label="전화 문의" data-en-label="Call us">${ICON.phone}</a>
+  <button type="button" class="quick__top" id="toTop" aria-label="맨 위로" data-ko-label="맨 위로" data-en-label="Back to top">${ICON.top}</button>
 </div>`;
 }
 
@@ -310,12 +327,18 @@ function setLang(lang, remember) {
   // 제목
   const en = document.querySelector('meta[name="gp:title-en"]');
   document.title = value === 'en' && en ? en.content : PAGE_TITLE_KO;
-  // placeholder · aria-label 등 속성 번역
-  document.querySelectorAll('[data-ko-placeholder]').forEach(function (el) {
-    el.setAttribute('placeholder', value === 'en' ? (el.dataset.enPlaceholder || el.dataset.koPlaceholder) : el.dataset.koPlaceholder);
+  // 속성 번역: data-ko-placeholder / data-ko-label(aria-label) / data-ko-alt / data-ko-title
+  //           각각 data-en-… 값이 영어 화면에서 쓰입니다
+  [['placeholder', 'Placeholder'], ['aria-label', 'Label'], ['alt', 'Alt'], ['title', 'Title']].forEach(function (pair) {
+    document.querySelectorAll('[data-ko-' + pair[1].toLowerCase() + ']').forEach(function (el) {
+      const ko = el.dataset['ko' + pair[1]];
+      const en = el.dataset['en' + pair[1]];
+      el.setAttribute(pair[0], value === 'en' ? (en || ko) : ko);
+    });
   });
-  document.querySelectorAll('[data-ko-label]').forEach(function (el) {
-    el.setAttribute('aria-label', value === 'en' ? (el.dataset.enLabel || el.dataset.koLabel) : el.dataset.koLabel);
+  // <option data-ko="…" data-en="…"> 선택 목록 문구
+  document.querySelectorAll('option[data-ko]').forEach(function (opt) {
+    opt.textContent = value === 'en' ? (opt.dataset.en || opt.dataset.ko) : opt.dataset.ko;
   });
   document.dispatchEvent(new CustomEvent('gp:lang', { detail: value }));
 }
@@ -368,8 +391,11 @@ function initNav() {
   const mobile = window.matchMedia('(max-width: 1024px)');
 
   function setOpen(open) {
+    const en = getLang() === 'en';
     toggle.setAttribute('aria-expanded', String(open));
-    toggle.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+    toggle.dataset.koLabel = open ? '메뉴 닫기' : '메뉴 열기';
+    toggle.dataset.enLabel = open ? 'Close menu' : 'Open menu';
+    toggle.setAttribute('aria-label', en ? toggle.dataset.enLabel : toggle.dataset.koLabel);
     nav.classList.toggle('is-open', open);
     header.classList.toggle('is-open', open);
     document.body.classList.toggle('is-locked', open);
@@ -435,6 +461,18 @@ function initReveal() {
     items.forEach(function (el) { el.classList.add('is-in'); });
     return;
   }
+  // 카드 목록처럼 같은 부모 아래 나란히 있는 항목은 순서대로 조금씩 늦게 나타나게 합니다
+  // (data-delay 를 직접 적은 곳은 그대로 둡니다)
+  const groups = new Map();
+  items.forEach(function (el) {
+    if (el.hasAttribute('data-delay') || !el.parentElement) return;
+    const list = groups.get(el.parentElement) || [];
+    list.push(el); groups.set(el.parentElement, list);
+  });
+  groups.forEach(function (list) {
+    if (list.length < 2) return;
+    list.forEach(function (el, i) { el.style.transitionDelay = (Math.min(i, 6) * 0.07) + 's'; });
+  });
   const io = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (entry.isIntersecting) { entry.target.classList.add('is-in'); io.unobserve(entry.target); }
@@ -495,6 +533,26 @@ function initSubnav() {
     const sec = document.getElementById(a.getAttribute('href').slice(1));
     if (sec) map.set(sec, a);
   });
+  // 휴대폰에서는 탭 줄이 화면보다 길어 '지금 탭'이 보이도록 가로로 옮겨야 합니다.
+  // 페이지가 움직이는 동안 다른 스크롤을 건드리면 (특히 아이폰 · 갤럭시에서) 페이지 스크롤이
+  // 끊기거나 멈추므로, 스크롤이 완전히 멈춘 뒤에 한 번만 즉시 옮깁니다.
+  // (scrollIntoView · smooth 스크롤은 쓰지 않습니다)
+  let pending = null, settle = 0;
+  function alignTab() {
+    const a = pending; pending = null;
+    if (!a) return;
+    const list = a.parentElement;
+    if (!list || list.scrollWidth <= list.clientWidth) return;
+    const lr = list.getBoundingClientRect(), ar = a.getBoundingClientRect();
+    if (ar.left >= lr.left + 8 && ar.right <= lr.right - 8) return;   // 이미 보이면 그대로
+    list.scrollLeft = Math.max(0, list.scrollLeft + (ar.left - lr.left) - (lr.width - ar.width) / 2);
+  }
+  function waitForStop() {
+    clearTimeout(settle);
+    settle = setTimeout(alignTab, 220);
+  }
+  window.addEventListener('scroll', function () { if (pending) waitForStop(); }, { passive: true });
+
   const io = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (!entry.isIntersecting) return;
@@ -502,11 +560,91 @@ function initSubnav() {
       const a = map.get(entry.target);
       if (a) {
         a.classList.add('is-active');
-        a.scrollIntoView({ block: 'nearest', inline: 'center' });
+        pending = a;
+        waitForStop();
       }
     });
   }, { rootMargin: '-45% 0px -50% 0px' });
   map.forEach(function (_, sec) { io.observe(sec); });
+}
+
+/* =========================================================
+ * 12-A. 문자 버튼 — <a data-sms> 에 휴대폰 종류에 맞는 문자 주소를 넣습니다
+ *       (아이폰은 sms:번호&body=, 안드로이드는 sms:번호?body= 형식을 씁니다)
+ *       data-sms-ko / data-sms-en 으로 페이지별 문구를 바꿀 수 있습니다
+ * ========================================================= */
+function smsHref(body) {
+  const num = SITE.telHref;
+  const ios = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  return 'sms:' + num + (ios ? '&' : '?') + 'body=' + encodeURIComponent(body);
+}
+function updateSmsLinks() {
+  const en = getLang() === 'en';
+  document.querySelectorAll('a[data-sms]').forEach(function (a) {
+    const body = en ? (a.dataset.smsEn || SITE.smsEn) : (a.dataset.smsKo || SITE.smsKo);
+    a.setAttribute('href', smsHref(body));
+  });
+}
+document.addEventListener('gp:lang', updateSmsLinks);
+
+/* 카카오톡 상담 링크 — <a data-kakao> 는 SITE.kakaoChat 이 있으면 그 주소로,
+   없으면 공개 화면에서 숨기고 검토 모드에서만 보여 줍니다 */
+function initKakaoLinks() {
+  document.querySelectorAll('a[data-kakao]').forEach(function (a) {
+    if (SITE.kakaoChat) {
+      a.setAttribute('href', SITE.kakaoChat);
+      a.setAttribute('target', '_blank');
+      a.setAttribute('rel', 'noopener');
+      a.classList.remove('tbd-only');
+    } else {
+      a.classList.add('tbd-only');
+      a.setAttribute('data-tbd', '카카오톡 채널 1:1 채팅 주소를 받으면 site.js 의 SITE.kakaoChat 에 입력하세요. 그 전에는 공개 화면에 보이지 않습니다.');
+      a.removeAttribute('href');
+    }
+  });
+}
+
+/* =========================================================
+ * 12-B. 지도 — 페이지를 스크롤하다 지도에 걸려 멈추지 않도록
+ *       처음에는 덮개를 씌워 두고, 누르면 지도를 움직일 수 있게 합니다
+ * ========================================================= */
+function initMaps() {
+  document.querySelectorAll('.map__frame').forEach(function (frame) {
+    if (frame.querySelector('.map__shield')) return;
+    const shield = document.createElement('button');
+    shield.type = 'button';
+    shield.className = 'map__shield';
+    shield.innerHTML = '<span><span data-lang="ko">눌러서 지도 움직이기</span><span data-lang="en">Tap to use the map</span></span>';
+    shield.addEventListener('click', function () { frame.classList.add('is-active'); });
+    frame.appendChild(shield);
+    frame.addEventListener('mouseleave', function () { frame.classList.remove('is-active'); });
+    document.addEventListener('touchstart', function (e) {
+      if (!frame.contains(e.target)) frame.classList.remove('is-active');
+    }, { passive: true });
+  });
+}
+
+/* =========================================================
+ * 12-C. 다른 페이지에서 '#구역' 주소로 들어왔을 때 위치 바로잡기
+ *       글꼴 · 사진이 늦게 들어와 위쪽 높이가 바뀌면 목표 구역이 조금 어긋납니다.
+ *       방문자가 아직 직접 움직이지 않았을 때만, 다 불러온 뒤 한 번 맞춥니다.
+ * ========================================================= */
+function initHashLanding() {
+  const id = decodeURIComponent((location.hash || '').slice(1));
+  if (!id) return;
+  let touched = false;
+  ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(function (t) {
+    window.addEventListener(t, function () { touched = true; }, { passive: true, once: true });
+  });
+  function align() {
+    const el = document.getElementById(id);
+    if (!el || touched) return;
+    const pad = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+    const delta = el.getBoundingClientRect().top - pad;
+    if (Math.abs(delta) > 8) window.scrollTo({ top: window.scrollY + delta, behavior: 'instant' });
+  }
+  const ready = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+  window.addEventListener('load', function () { ready.then(function () { setTimeout(align, 120); setTimeout(align, 700); }); });
 }
 
 /* =========================================================
@@ -518,6 +656,15 @@ function initHeroCanvas() {
   const ctx = canvas.getContext('2d');
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let w = 0, h = 0, dpr = 1, points = [], running = true, raf = 0;
+  const mouse = { x: -9999, y: -9999 };
+  const hero = canvas.closest('.hero');
+  if (hero && !reduce) {
+    hero.addEventListener('pointermove', function (e) {
+      const r = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+    }, { passive: true });
+    hero.addEventListener('pointerleave', function () { mouse.x = mouse.y = -9999; });
+  }
 
   function resize() {
     dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -554,6 +701,14 @@ function initHeroCanvas() {
           ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
         }
       }
+      // 마우스 가까이 있는 입자는 선으로 이어지고 살짝 끌려옵니다
+      const mx = mouse.x - p.x, my = mouse.y - p.y, md = Math.sqrt(mx * mx + my * my);
+      if (md < 180) {
+        ctx.strokeStyle = 'rgba(125, 211, 252,' + (0.42 * (1 - md / 180)).toFixed(3) + ')';
+        ctx.lineWidth = 0.8;
+        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
+        if (!reduce) { p.x += mx * 0.0025; p.y += my * 0.0025; }
+      }
       const a = 0.45 + Math.sin(p.t) * 0.3;
       ctx.fillStyle = 'rgba(186, 230, 253,' + a.toFixed(3) + ')';
       ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
@@ -572,6 +727,155 @@ function initHeroCanvas() {
       if (!vis) { running = false; cancelAnimationFrame(raf); }
     }).observe(canvas);
   }
+}
+
+/* =========================================================
+ * 15. 움직임 — 숫자 올라가기 · 카드 빛 · 첫 화면 기울기
+ *     (움직임 줄이기 설정을 켠 방문자에게는 모두 꺼집니다)
+ * ========================================================= */
+function initMotion() {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (reduce) return;
+
+  // ⓪ 첫 화면 제목을 단어로 나눠 하나씩 떠오르게 (글자는 그대로, 감싸기만 함)
+  document.querySelectorAll('.hero h1 [data-lang]').forEach(function (block) {
+    let i = 0;
+    block.querySelectorAll('.line').forEach(function (line) {
+      Array.from(line.childNodes).forEach(function (node) {
+        if (node.nodeType === 1) { node.classList.add('w'); node.style.setProperty('--i', i++); return; }
+        if (node.nodeType !== 3) return;
+        const frag = document.createDocumentFragment();
+        node.nodeValue.split(/(\s+)/).forEach(function (part) {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+          const w = document.createElement('span');
+          w.className = 'w'; w.textContent = part; w.style.setProperty('--i', i++);
+          frag.appendChild(w);
+        });
+        line.replaceChild(frag, node);
+      });
+    });
+    block.closest('h1').classList.add('is-split');
+  });
+
+  // ① 숫자가 0부터 올라가는 효과 — 핵심 수치, 막대 그래프 머리의 숫자
+  const NUM = /\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?/g;
+  function wrapNumbers(el) {
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(function (node) {
+      const text = node.nodeValue;
+      if (!NUM.test(text)) return;
+      NUM.lastIndex = 0;
+      const frag = document.createDocumentFragment();
+      let last = 0, m;
+      while ((m = NUM.exec(text))) {
+        frag.appendChild(document.createTextNode(text.slice(last, m.index)));
+        const span = document.createElement('span');
+        span.className = 'count';
+        span.setAttribute('data-count', m[0]);
+        span.textContent = m[0];
+        frag.appendChild(span);
+        last = m.index + m[0].length;
+      }
+      frag.appendChild(document.createTextNode(text.slice(last)));
+      node.parentNode.replaceChild(frag, node);
+    });
+  }
+  function run(span) {
+    const raw = span.getAttribute('data-count');
+    const target = parseFloat(raw.replace(/,/g, ''));
+    const decimals = (raw.split('.')[1] || '').length;
+    const comma = raw.indexOf(',') > -1;
+    const t0 = performance.now(), dur = 1400;
+    // 자리 폭이 흔들리지 않도록 최종 숫자 폭을 미리 잡아 둡니다
+    span.style.minWidth = span.getBoundingClientRect().width + 'px';
+    function frame(now) {
+      const k = Math.min(1, (now - t0) / dur);
+      const v = target * (1 - Math.pow(1 - k, 3));
+      let out = v.toFixed(decimals);
+      if (comma) out = Number(out).toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+      span.textContent = k < 1 ? out : raw;
+      if (k < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+  const counters = document.querySelectorAll('.spec__value, .bar__head > b, [data-countup]');
+  if (counters.length && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        io.unobserve(entry.target);
+        entry.target.querySelectorAll('.count').forEach(run);
+      });
+    }, { threshold: 0.4 });
+    counters.forEach(function (el) { wrapNumbers(el); io.observe(el); });
+  }
+
+  if (!finePointer) return;
+
+  // ② 마우스를 따라 카드 위에 은은한 빛
+  document.querySelectorAll('.card:not(.card--flat), .cert, .app, .product, .news-card, .registration__doc').forEach(function (el) {
+    el.classList.add('has-glow');
+    el.addEventListener('pointermove', function (e) {
+      const r = el.getBoundingClientRect();
+      el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  });
+
+  // ③ 첫 화면 엠블럼이 마우스 방향으로 살짝 기울어짐
+  const hero = document.querySelector('.hero');
+  const visual = hero && hero.querySelector('.hero__visual');
+  if (hero && visual) {
+    let raf = 0, px = 0, py = 0;
+    hero.addEventListener('pointermove', function (e) {
+      const r = hero.getBoundingClientRect();
+      px = (e.clientX - r.left) / r.width - 0.5;
+      py = (e.clientY - r.top) / r.height - 0.5;
+      if (!raf) raf = requestAnimationFrame(function () {
+        visual.style.setProperty('--px', px.toFixed(3));
+        visual.style.setProperty('--py', py.toFixed(3));
+        hero.style.setProperty('--hx', ((px + 0.5) * 100).toFixed(1) + '%');
+        hero.style.setProperty('--hy', ((py + 0.5) * 100).toFixed(1) + '%');
+        raf = 0;
+      });
+    });
+    hero.addEventListener('pointerleave', function () {
+      visual.style.setProperty('--px', 0); visual.style.setProperty('--py', 0);
+    });
+  }
+}
+
+/* =========================================================
+ * 16. 크게 보기 (사업자등록증 등) — <a data-lightbox href="이미지">
+ *     자바스크립트가 없으면 이미지가 새 창으로 열립니다
+ * ========================================================= */
+function initLightbox() {
+  const links = document.querySelectorAll('a[data-lightbox]');
+  if (!links.length || typeof HTMLDialogElement !== 'function') return;
+  const dlg = document.createElement('dialog');
+  dlg.className = 'lightbox';
+  dlg.innerHTML = `<form method="dialog" class="lightbox__bar">
+      <button class="lightbox__close" value="close" aria-label="닫기" data-ko-label="닫기" data-en-label="Close">${ICON.close}</button>
+    </form><img class="lightbox__img" alt="">`;
+  document.body.appendChild(dlg);
+  const img = dlg.querySelector('.lightbox__img');
+  links.forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      const inner = a.querySelector('img');
+      img.src = a.getAttribute('href');
+      img.alt = inner ? inner.alt : '';
+      const btn = dlg.querySelector('.lightbox__close');
+      btn.setAttribute('aria-label', document.documentElement.lang === 'en' ? 'Close' : '닫기');
+      dlg.showModal();
+    });
+  });
+  // 바깥(어두운 부분)을 누르면 닫힘
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
 }
 
 /* =========================================================
@@ -676,6 +980,12 @@ document.addEventListener('DOMContentLoaded', function () {
   initAccordion();
   initFilters();
   initSubnav();
+  initMaps();
+  initHashLanding();
+  updateSmsLinks();
+  initKakaoLinks();
   initHeroCanvas();
+  initMotion();
+  initLightbox();
   initReview();
 });

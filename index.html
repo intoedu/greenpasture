@@ -27,7 +27,7 @@
 <meta name="theme-color" content="#080d1b">
 <script>(function(){var d=document.documentElement;d.classList.remove('no-js');try{var q=new URLSearchParams(location.search).get('lang');var l=q||localStorage.getItem('gp-lang');if(l==='en')d.lang='en';}catch(e){}})();</script>
 <link rel="stylesheet" href="assets/fonts/pretendard/pretendard.css">
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/style.css?v=3">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -45,6 +45,7 @@
     "addressRegion": "경기도",
     "addressCountry": "KR"
   },
+  "taxID": "384-87-04017",
   "brand": { "@type": "Brand", "name": "V-ZERO" }
 }
 </script>
@@ -79,7 +80,19 @@
         </div>
       </div>
       <div class="hero__visual">
+        <!-- 엠블럼 주위: 퍼져 나가는 파동 · 도는 궤도와 입자 (장식) -->
+        <div class="hero__fx" aria-hidden="true">
+          <span class="wave"></span><span class="wave"></span><span class="wave"></span>
+          <span class="orbit orbit--a"><span class="orbit__ring"><i></i></span></span>
+          <span class="orbit orbit--b"><span class="orbit__ring"><i></i><i></i></span></span>
+          <span class="orbit orbit--c"><span class="orbit__ring"><i></i></span></span>
+        </div>
         <img class="hero__emblem" src="assets/img/vzero-emblem.jpg" alt="V-ZERO 엠블럼" width="1400" height="1062" fetchpriority="high">
+        <ul class="hero__chips" aria-hidden="true">
+          <li class="chip chip--1"><i data-icon="sun"></i><span data-lang="ko">가시광 촉매</span><span data-lang="en">Visible-light catalyst</span></li>
+          <li class="chip chip--2"><i data-icon="moon"></i><span data-lang="ko">무광 촉매</span><span data-lang="en">Low-light catalyst</span></li>
+          <li class="chip chip--3"><i data-icon="layers"></i><span data-lang="ko">50–150nm 초박막</span><span data-lang="en">50–150nm ultra-thin film</span></li>
+        </ul>
       </div>
     </div>
     <span class="hero__scroll" aria-hidden="true">Scroll</span>
@@ -142,7 +155,7 @@
         </ul>
         <div class="btn-row">
           <a class="btn btn--dark" href="about.html"><span data-lang="ko">회사 소개</span><span data-lang="en">About Us</span><i data-icon="arrow"></i></a>
-          <a class="btn btn--line" href="about.html#message"><span data-lang="ko">CEO 인사말</span><span data-lang="en">CEO Message</span></a>
+          <a class="btn btn--line" href="about.html#message"><span data-lang="ko">대표 인사말</span><span data-lang="en">CEO Message</span></a>
         </div>
       </div>
       <div class="reveal" data-delay="2">
@@ -234,6 +247,11 @@
       </div>
     </div>
   </section>
+
+  <!-- ============ 흐르는 산업 띠 (장식 · 7대 산업 영문명) ============ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track"><div class="marquee__group"><span class="marquee__item">Home Appliances</span><span class="marquee__item">Construction Materials</span><span class="marquee__item">Medical &amp; Healthcare</span><span class="marquee__item">Automotive &amp; Mobility</span><span class="marquee__item">Textiles · Plastics · Wood · Metals</span><span class="marquee__item">Public Procurement</span><span class="marquee__item">Global B2B Network</span></div><div class="marquee__group"><span class="marquee__item">Home Appliances</span><span class="marquee__item">Construction Materials</span><span class="marquee__item">Medical &amp; Healthcare</span><span class="marquee__item">Automotive &amp; Mobility</span><span class="marquee__item">Textiles · Plastics · Wood · Metals</span><span class="marquee__item">Public Procurement</span><span class="marquee__item">Global B2B Network</span></div></div>
+  </div>
 
   <!-- ============ 적용 분야 ============ -->
   <section class="section section--soft" aria-labelledby="appTitle">
@@ -436,7 +454,7 @@
 </main>
 
 <div id="footer-slot"></div>
-<script src="assets/data/posts.js"></script>
-<script src="assets/js/site.js"></script>
+<script src="assets/data/posts.js?v=3"></script>
+<script src="assets/js/site.js?v=3"></script>
 </body>
 </html>
