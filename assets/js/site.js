@@ -37,7 +37,7 @@ const SITE = {
   // 응대 시간 · 사업자등록번호 · 설립일은 확인되면 입력하세요. 비어 있으면 공개 화면에 나오지 않습니다.
   hoursKo: '',      // 예: '평일 09:00 – 18:00 (주말 · 공휴일 휴무)'
   hoursEn: '',      // 예: 'Mon–Fri 09:00–18:00 KST (closed weekends & public holidays)'
-  bizNo: '',        // 예: '123-45-67890'
+  bizNo: '384-87-04017',   // 사업자등록증(2026-06-05 발급) 기준
   sites: ['www.greenpasture.co.kr', 'www.vzero.co.kr'],
   // SNS 주소를 넣으면 푸터에 아이콘이 나타납니다. 비워두면 표시되지 않습니다.
   sns: {
@@ -99,6 +99,8 @@ const ICON = {
   chevron: `<svg ${S}><path d="m6 9 6 6 6-6"/></svg>`,
   top: `<svg ${S} stroke-width="2"><path d="m6 15 6-6 6 6"/></svg>`,
   search: `<svg ${S}><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>`,
+  zoom: `<svg ${S}><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg>`,
+  close: `<svg ${S} stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg>`,
   link: `<svg ${S}><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>`,
   share: `<svg ${S}><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>`,
   doc: `<svg ${S}><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>`,
@@ -280,7 +282,7 @@ function buildFooter() {
   <div class="wrap footer__bottom">
     <p class="footer__biz">
       <span data-lang="ko">${SITE.nameKo}</span><span data-lang="en">${SITE.nameEn}</span>
-      <span data-lang="ko">공동대표 ${SITE.ceoKo}</span><span data-lang="en">Co-CEOs ${SITE.ceoEn}</span>
+      <span data-tbd="사업자등록증의 대표자는 송창근 1인입니다. 박건식 대표의 대표이사 등기 여부를 확인한 뒤 '공동대표' 표기를 정하세요."><span data-lang="ko">공동대표 ${SITE.ceoKo}</span><span data-lang="en">Co-CEOs ${SITE.ceoEn}</span></span>
       ${SITE.bizNo
         ? `<span><span data-lang="ko">사업자등록번호</span><span data-lang="en">Business Reg. No.</span> ${SITE.bizNo}</span>`
         : `<span class="tbd-only" data-tbd="사업자등록번호를 받으면 site.js 의 SITE.bizNo 에 입력하세요.">사업자등록번호 (확인 후 기재)</span>`}
@@ -459,6 +461,18 @@ function initReveal() {
     items.forEach(function (el) { el.classList.add('is-in'); });
     return;
   }
+  // 카드 목록처럼 같은 부모 아래 나란히 있는 항목은 순서대로 조금씩 늦게 나타나게 합니다
+  // (data-delay 를 직접 적은 곳은 그대로 둡니다)
+  const groups = new Map();
+  items.forEach(function (el) {
+    if (el.hasAttribute('data-delay') || !el.parentElement) return;
+    const list = groups.get(el.parentElement) || [];
+    list.push(el); groups.set(el.parentElement, list);
+  });
+  groups.forEach(function (list) {
+    if (list.length < 2) return;
+    list.forEach(function (el, i) { el.style.transitionDelay = (Math.min(i, 6) * 0.07) + 's'; });
+  });
   const io = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (entry.isIntersecting) { entry.target.classList.add('is-in'); io.unobserve(entry.target); }
@@ -661,6 +675,132 @@ function initHeroCanvas() {
 }
 
 /* =========================================================
+ * 15. 움직임 — 숫자 올라가기 · 카드 빛 · 첫 화면 기울기
+ *     (움직임 줄이기 설정을 켠 방문자에게는 모두 꺼집니다)
+ * ========================================================= */
+function initMotion() {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (reduce) return;
+
+  // ① 숫자가 0부터 올라가는 효과 — 핵심 수치, 막대 그래프 머리의 숫자
+  const NUM = /\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?/g;
+  function wrapNumbers(el) {
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(function (node) {
+      const text = node.nodeValue;
+      if (!NUM.test(text)) return;
+      NUM.lastIndex = 0;
+      const frag = document.createDocumentFragment();
+      let last = 0, m;
+      while ((m = NUM.exec(text))) {
+        frag.appendChild(document.createTextNode(text.slice(last, m.index)));
+        const span = document.createElement('span');
+        span.className = 'count';
+        span.setAttribute('data-count', m[0]);
+        span.textContent = m[0];
+        frag.appendChild(span);
+        last = m.index + m[0].length;
+      }
+      frag.appendChild(document.createTextNode(text.slice(last)));
+      node.parentNode.replaceChild(frag, node);
+    });
+  }
+  function run(span) {
+    const raw = span.getAttribute('data-count');
+    const target = parseFloat(raw.replace(/,/g, ''));
+    const decimals = (raw.split('.')[1] || '').length;
+    const comma = raw.indexOf(',') > -1;
+    const t0 = performance.now(), dur = 1400;
+    // 자리 폭이 흔들리지 않도록 최종 숫자 폭을 미리 잡아 둡니다
+    span.style.minWidth = span.getBoundingClientRect().width + 'px';
+    function frame(now) {
+      const k = Math.min(1, (now - t0) / dur);
+      const v = target * (1 - Math.pow(1 - k, 3));
+      let out = v.toFixed(decimals);
+      if (comma) out = Number(out).toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+      span.textContent = k < 1 ? out : raw;
+      if (k < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+  const counters = document.querySelectorAll('.spec__value, .bar__head > b, [data-countup]');
+  if (counters.length && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        io.unobserve(entry.target);
+        entry.target.querySelectorAll('.count').forEach(run);
+      });
+    }, { threshold: 0.4 });
+    counters.forEach(function (el) { wrapNumbers(el); io.observe(el); });
+  }
+
+  if (!finePointer) return;
+
+  // ② 마우스를 따라 카드 위에 은은한 빛
+  document.querySelectorAll('.card:not(.card--flat), .cert, .app, .product, .news-card, .registration__doc').forEach(function (el) {
+    el.classList.add('has-glow');
+    el.addEventListener('pointermove', function (e) {
+      const r = el.getBoundingClientRect();
+      el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  });
+
+  // ③ 첫 화면 엠블럼이 마우스 방향으로 살짝 기울어짐
+  const hero = document.querySelector('.hero');
+  const visual = hero && hero.querySelector('.hero__visual');
+  if (hero && visual) {
+    let raf = 0, px = 0, py = 0;
+    hero.addEventListener('pointermove', function (e) {
+      const r = hero.getBoundingClientRect();
+      px = (e.clientX - r.left) / r.width - 0.5;
+      py = (e.clientY - r.top) / r.height - 0.5;
+      if (!raf) raf = requestAnimationFrame(function () {
+        visual.style.setProperty('--px', px.toFixed(3));
+        visual.style.setProperty('--py', py.toFixed(3));
+        raf = 0;
+      });
+    });
+    hero.addEventListener('pointerleave', function () {
+      visual.style.setProperty('--px', 0); visual.style.setProperty('--py', 0);
+    });
+  }
+}
+
+/* =========================================================
+ * 16. 크게 보기 (사업자등록증 등) — <a data-lightbox href="이미지">
+ *     자바스크립트가 없으면 이미지가 새 창으로 열립니다
+ * ========================================================= */
+function initLightbox() {
+  const links = document.querySelectorAll('a[data-lightbox]');
+  if (!links.length || typeof HTMLDialogElement !== 'function') return;
+  const dlg = document.createElement('dialog');
+  dlg.className = 'lightbox';
+  dlg.innerHTML = `<form method="dialog" class="lightbox__bar">
+      <button class="lightbox__close" value="close" aria-label="닫기" data-ko-label="닫기" data-en-label="Close">${ICON.close}</button>
+    </form><img class="lightbox__img" alt="">`;
+  document.body.appendChild(dlg);
+  const img = dlg.querySelector('.lightbox__img');
+  links.forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      const inner = a.querySelector('img');
+      img.src = a.getAttribute('href');
+      img.alt = inner ? inner.alt : '';
+      const btn = dlg.querySelector('.lightbox__close');
+      btn.setAttribute('aria-label', document.documentElement.lang === 'en' ? 'Close' : '닫기');
+      dlg.showModal();
+    });
+  });
+  // 바깥(어두운 부분)을 누르면 닫힘
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+}
+
+/* =========================================================
  * 14. 메인 최신 소식 (assets/data/posts.js 의 글 3개)
  * ========================================================= */
 function escapeHtml(s) {
@@ -766,5 +906,7 @@ document.addEventListener('DOMContentLoaded', function () {
   updateSmsLinks();
   initKakaoLinks();
   initHeroCanvas();
+  initMotion();
+  initLightbox();
   initReview();
 });

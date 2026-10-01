@@ -17,6 +17,10 @@
   4) 로고로 파비콘 · 홈 화면 아이콘 다시 만들기 (logo-gp.png 를 바꾼 뒤 실행)
      python3 tools/images.py icons
 
+  5) 사업자등록증 · 인증서 같은 서류를 '홈페이지 게시용' 워터마크와 함께 저장
+     python3 tools/images.py document 원본.jpg assets/img/biz-registration.jpg --crop 0,0,1416,2000
+     (--crop 은 촬영본의 바깥 배경을 잘라낼 때만. 좌,위,우,아래 px)
+
 공유 미리보기 이미지(og-image.jpg)는 tools/make-og.js 로 만듭니다 (tools/README.md 참고).
 """
 import argparse
@@ -30,6 +34,7 @@ except ImportError:
 
 ROOT = Path(__file__).resolve().parent.parent
 IMG = ROOT / "assets" / "img"
+FONT = ROOT / "tools" / "fonts" / "Pretendard-SemiBold.otf"  # 워터마크용 (OFL, tools/fonts/LICENSE.txt)
 ICON_BG = (10, 16, 32, 255)  # style.css 의 --night-900 과 같은 계열
 
 
@@ -83,6 +88,34 @@ def cmd_keyout(a):
     save_web(res, a.dst)
 
 
+def cmd_document(a):
+    from PIL import ImageFont
+    im = ImageOps.exif_transpose(Image.open(a.src)).convert("RGB")
+    if a.crop:
+        im = im.crop(tuple(int(v) for v in a.crop.split(",")))
+    if im.width > a.width:
+        im = im.resize((a.width, round(im.height * a.width / im.width)), Image.LANCZOS)
+    # 서류 전체에 비스듬히 반복되는 옅은 글씨 — 다른 곳에 그대로 쓰기 어렵게 합니다
+    size = max(18, im.width // 24)
+    font = ImageFont.truetype(str(FONT), size)
+    diag = int((im.width ** 2 + im.height ** 2) ** 0.5) + size * 4
+    layer = Image.new("RGBA", (diag, diag), (0, 0, 0, 0))
+    d = ImageDraw.Draw(layer)
+    text = a.text + "     "
+    tw = d.textlength(text, font=font)
+    step_y = int(size * 4.2)
+    for row, y in enumerate(range(0, diag, step_y)):
+        x = -((row * tw / 2) % tw)
+        while x < diag:
+            d.text((x, y), text, font=font, fill=(20, 52, 112, a.alpha))
+            x += tw
+    layer = layer.rotate(a.angle, resample=Image.BICUBIC)
+    left, top = (diag - im.width) // 2, (diag - im.height) // 2
+    layer = layer.crop((left, top, left + im.width, top + im.height))
+    out = Image.alpha_composite(im.convert("RGBA"), layer)
+    save_web(out, a.dst, a.quality)
+
+
 def make_icon(mark, size, pad):
     canvas = Image.new("RGBA", (size, size), (0, 0, 0, 0))
     ImageDraw.Draw(canvas).rounded_rectangle((0, 0, size - 1, size - 1), radius=int(size * 0.22), fill=ICON_BG)
@@ -133,6 +166,16 @@ def main():
     s = sub.add_parser("icons", help="logo-gp.png 로 파비콘 · 홈 화면 아이콘 생성")
     s.add_argument("--logo", default=str(IMG / "logo-gp.png"))
     s.set_defaults(func=cmd_icons)
+
+    s = sub.add_parser("document", help="서류 이미지에 '홈페이지 게시용' 워터마크를 넣어 저장")
+    s.add_argument("src"); s.add_argument("dst")
+    s.add_argument("--crop", default="", help="좌,위,우,아래 px (바깥 배경 잘라내기)")
+    s.add_argument("--width", type=int, default=1000)
+    s.add_argument("--text", default="그린파스처 홈페이지 게시용")
+    s.add_argument("--alpha", type=int, default=34, help="워터마크 진하기 0~255 (기본 34)")
+    s.add_argument("--angle", type=float, default=28)
+    s.add_argument("--quality", type=int, default=82)
+    s.set_defaults(func=cmd_document)
 
     a = p.parse_args()
     a.func(a)

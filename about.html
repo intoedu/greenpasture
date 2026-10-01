@@ -20,7 +20,7 @@
 <meta name="theme-color" content="#080d1b">
 <script>(function(){var d=document.documentElement;d.classList.remove('no-js');try{var q=new URLSearchParams(location.search).get('lang');var l=q||localStorage.getItem('gp-lang');if(l==='en')d.lang='en';}catch(e){}})();</script>
 <link rel="stylesheet" href="assets/fonts/pretendard/pretendard.css">
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/style.css?v=2">
 </head>
 <body>
 <a class="skip-link" href="#main">본문 바로가기</a>
@@ -205,12 +205,14 @@
           <tbody>
             <tr><th scope="row"><span data-lang="ko">회사명</span><span data-lang="en">Company</span></th>
               <td><span data-lang="ko">주식회사 그린파스처</span><span data-lang="en">Green Pasture Co., Ltd.</span></td></tr>
-            <tr><th scope="row"><span data-lang="ko">대표자</span><span data-lang="en">Co-CEOs</span></th>
+            <tr data-tbd="사업자등록증의 대표자는 송창근 1인입니다. 박건식 대표의 대표이사 등기 여부를 확인한 뒤 '공동대표' 표기를 정하세요 (대표님 확인 요청 20번)."><th scope="row"><span data-lang="ko">대표자</span><span data-lang="en">Co-CEOs</span></th>
               <td><span data-lang="ko">공동대표 송창근 · 박건식</span><span data-lang="en">Song Chang-geun · Park Geon-sik</span></td></tr>
-            <tr data-tbd="설립일(법인등기일)을 받으면 입력하세요. 비어 있으면 이 줄은 삭제해도 됩니다."><th scope="row"><span data-lang="ko">설립</span><span data-lang="en">Founded</span></th>
-              <td><span data-lang="ko">확인 후 기재</span><span data-lang="en">To be announced</span></td></tr>
+            <tr><th scope="row"><span data-lang="ko">개업일</span><span data-lang="en">Business start</span></th>
+              <td><span data-lang="ko">2026년 5월 27일</span><span data-lang="en">May 27, 2026</span></td></tr>
+            <tr><th scope="row"><span data-lang="ko">사업자등록번호</span><span data-lang="en">Business Reg. No.</span></th>
+              <td>384-87-04017</td></tr>
             <tr><th scope="row"><span data-lang="ko">업종</span><span data-lang="en">Industry</span></th>
-              <td><span data-lang="ko">제조업 — 나노 촉매 코팅제 및 관련 제품</span><span data-lang="en">Manufacturing — nano-catalyst coatings and related products</span></td></tr>
+              <td><span data-lang="ko">제조업 — 항균 · 항바이러스 관련 제품, 촉매제, 건축자재</span><span data-lang="en">Manufacturing — antibacterial &amp; antiviral products and catalysts, building materials</span></td></tr>
             <tr><th scope="row"><span data-lang="ko">주요 브랜드</span><span data-lang="en">Brand</span></th>
               <td>V-ZERO — <span data-lang="ko">오리지널 원액 · 프리미엄 에어 필터 · 안심 시공 케어</span><span data-lang="en">Original Solution · Premium Air Filter · Coating Care</span></td></tr>
             <tr><th scope="row"><span data-lang="ko">소재지</span><span data-lang="en">Address</span></th>
@@ -218,7 +220,7 @@
             <tr><th scope="row"><span data-lang="ko">이메일</span><span data-lang="en">E-mail</span></th>
               <td><a href="mailto:ceo@greenpasture.co.kr">ceo@greenpasture.co.kr</a></td></tr>
             <tr><th scope="row"><span data-lang="ko">연락처</span><span data-lang="en">Phone</span></th>
-              <td><a href="tel:01034972524">010-3497-2524</a></td></tr>
+              <td><a href="tel:+821034972524"><span data-lang="ko">010-3497-2524</span><span data-lang="en">+82 10-3497-2524</span></a></td></tr>
             <tr><th scope="row"><span data-lang="ko">홈페이지</span><span data-lang="en">Website</span></th>
               <td>www.greenpasture.co.kr · www.vzero.co.kr</td></tr>
           </tbody>
@@ -247,6 +249,28 @@
         <span class="eyebrow">Trust</span>
         <h2 class="h2" id="certTitle"><span data-lang="ko">공인 시험 · 인증 · 특허</span><span data-lang="en">Tests, certifications &amp; patents</span></h2>
         <p class="lead"><span data-lang="ko">공인기관 시험성적서와 기술 인증, 원천기술 관련 특허로 V-ZERO의 성능과 안전성을 확인합니다.</span><span data-lang="en">V-ZERO's performance and safety are backed by accredited test reports, certifications and core technology patents.</span></p>
+      </div>
+
+      <!-- 사업자 등록 정보 (사업자등록증 원본으로 확인, 2026-06-05 발급) -->
+      <div class="registration reveal">
+        <a class="registration__doc" href="assets/img/biz-registration.jpg" target="_blank" rel="noopener" data-lightbox
+           aria-label="사업자등록증 크게 보기" data-ko-label="사업자등록증 크게 보기" data-en-label="View the business registration certificate">
+          <img src="assets/img/biz-registration.jpg" width="1000" height="1412" loading="lazy"
+               alt="주식회사 그린파스처 사업자등록증 (홈페이지 게시용 워터마크)" data-ko-alt="주식회사 그린파스처 사업자등록증 (홈페이지 게시용 워터마크)" data-en-alt="Business registration certificate of Green Pasture Co., Ltd. (watermarked for web)">
+          <span class="registration__zoom"><i data-icon="zoom"></i><span data-lang="ko">크게 보기</span><span data-lang="en">Enlarge</span></span>
+        </a>
+        <div class="registration__body">
+          <span class="registration__badge"><i data-icon="check"></i><span data-lang="ko">국세청 발급 사업자등록증</span><span data-lang="en">Issued by the National Tax Service</span></span>
+          <h3 class="h3"><span data-lang="ko">사업자 등록 정보</span><span data-lang="en">Business registration</span></h3>
+          <dl class="registration__list">
+            <div><dt><span data-lang="ko">상호</span><span data-lang="en">Company</span></dt><dd><span data-lang="ko">주식회사 그린파스처</span><span data-lang="en">Green Pasture Co., Ltd.</span></dd></div>
+            <div><dt><span data-lang="ko">사업자등록번호</span><span data-lang="en">Registration No.</span></dt><dd>384-87-04017</dd></div>
+            <div><dt><span data-lang="ko">개업일</span><span data-lang="en">Business start</span></dt><dd><span data-lang="ko">2026년 5월 27일</span><span data-lang="en">May 27, 2026</span></dd></div>
+            <div><dt><span data-lang="ko">업태 · 종목</span><span data-lang="en">Business type</span></dt><dd><span data-lang="ko">제조업 — 항균 · 항바이러스 관련 제품 제조업, 항균 · 항바이러스 촉매제 제조업, 건축자재 제조업</span><span data-lang="en">Manufacturing — antibacterial &amp; antiviral products, antibacterial &amp; antiviral catalysts, building materials</span></dd></div>
+            <div><dt><span data-lang="ko">사업장</span><span data-lang="en">Address</span></dt><dd><span data-lang="ko">경기도 광주시 곤지암읍 벌열미길 39-14</span><span data-lang="en">39-14, Beoryeolmi-gil, Gonjiam-eup, Gwangju-si, Gyeonggi-do</span></dd></div>
+            <div><dt><span data-lang="ko">발급</span><span data-lang="en">Issued</span></dt><dd><span data-lang="ko">경기광주세무서 · 2026년 6월 5일</span><span data-lang="en">Gyeonggi Gwangju Tax Office · June 5, 2026</span></dd></div>
+          </dl>
+        </div>
       </div>
 
       <h3 class="h4 reveal" style="margin-bottom:16px"><span data-lang="ko">주요 인증 · 시험기관</span><span data-lang="en">Certifications &amp; testing bodies</span></h3>
@@ -343,6 +367,6 @@
 </main>
 
 <div id="footer-slot"></div>
-<script src="assets/js/site.js"></script>
+<script src="assets/js/site.js?v=2"></script>
 </body>
 </html>

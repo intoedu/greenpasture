@@ -39,6 +39,7 @@
 - 로컬: `python3 -m http.server 8080` 후 `http://localhost:8080/`. 영문은 `?lang=en`.
 - 고친 뒤 최소 확인: 모든 페이지를 한/영 · PC(1440) · 모바일(390)로 열어 콘솔 오류 · 가로 스크롤이 없는지, 스크롤이 끝까지 되는지, 문의 · 신청 양식이 동작하는지.
 - 스크롤 주의: 페이지 전체를 움직이는 `scrollIntoView` 를 스크롤 중에 호출하지 않는다 (탭 메뉴 스크롤이 되돌아가던 원인).
+- 움직임(애니메이션)은 `style.css` 25장 · `site.js` 15장(숫자 올라가기 · 카드 빛 · 첫 화면 기울기) · 16장(크게 보기). 새 효과는 `prefers-reduced-motion` 에서 꺼지게 하고, 스크롤 이벤트 대신 IntersectionObserver 를 쓴다. CSS · JS 를 고치면 HTML 의 `?v=` 를 올린다 (지금 2).
 
 ## 배포
 `main` 에 합치면 `.github/workflows/deploy-pages.yml` 이 공개 파일만 모아 GitHub Pages 로 배포한다.
