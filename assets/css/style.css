@@ -544,9 +544,12 @@ html[lang="en"] [data-lang="ko"] { display: none !important; }
   background: var(--green-50) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233d9a2c' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12 5 5 9-10'/%3E%3C/svg%3E") center/12px no-repeat;
 }
 .checks strong { color: var(--ink); }
-.section--dark .checks li { color: var(--on-dark-soft); }
-.section--dark .checks strong { color: #fff; }
-.section--dark .checks li::before { background-color: rgba(124,205,95,.14); }
+.section--dark .checks li,
+.card--dark .checks li { color: var(--on-dark-soft); }
+.section--dark .checks strong,
+.card--dark .checks strong { color: #fff; }
+.section--dark .checks li::before,
+.card--dark .checks li::before { background-color: rgba(124,205,95,.14); }
 
 /* 배지 */
 .badge {
