@@ -32,7 +32,7 @@ window.GP_POSTS = [
     },
     summary: {
       ko: 'V-ZERO 기술과 제품, 적용 분야, 견적·샘플·시공 상담 신청을 한곳에서 확인하실 수 있습니다.',
-      en: 'Explore V-ZERO technology, products and applications, and request quotes, samples or on-site consultations in one place.'
+      en: 'Find V-ZERO technology, products and applications, and apply for quotes, samples or application consultations, all in one place.'
     },
     body: {
       ko: `
@@ -43,19 +43,19 @@ window.GP_POSTS = [
   <li><a href="business.html#technology">핵심 기술</a> — 가시광 · 무광(암촉매) · 열촉매 3중 작동 원리</li>
   <li><a href="business.html#products">제품 라인업</a> — 오리지널 원액, 프리미엄 에어 필터(해외용), 안심 시공 케어</li>
   <li><a href="business.html#performance">시험 · 실증 데이터</a> — 항균 · 항바이러스 · 탈취 시험 결과 요약</li>
-  <li><a href="apply.html">신청 · 예약</a> — 견적 요청, 샘플 신청, 시공 상담 · 현장 방문 예약, 파트너 신청</li>
+  <li><a href="apply.html">신청 · 예약</a> — 견적 요청, 샘플 신청, 시공 상담 · 방문 예약, 파트너 신청</li>
 </ul>
 <p>궁금하신 점은 <a href="contact.html">문의하기</a>에 남겨 주시면 담당자가 확인 후 연락드리겠습니다.</p>
 <p>감사합니다.</p>`,
       en: `
 <p>Thank you for visiting Green Pasture Co., Ltd.</p>
-<p>We have launched our new website to introduce <strong>V-ZERO</strong>, our catalyst coating, more clearly to customers and partners.</p>
+<p>We have launched our new website to introduce <strong>V-ZERO</strong>, our catalyst coating, accurately to more people.</p>
 <h3>What you can find here</h3>
 <ul>
   <li><a href="business.html#technology">Technology</a> — how visible-light, lightless (dark) and thermal catalysis work together</li>
-  <li><a href="business.html#products">Products</a> — Original solution, Premium air filter (overseas), and Professional coating care</li>
+  <li><a href="business.html#products">Products</a> — Original Solution, Premium Air Filter (overseas) and Safe Application Care</li>
   <li><a href="business.html#performance">Test data</a> — a summary of antibacterial, antiviral and deodorization tests</li>
-  <li><a href="apply.html">Requests</a> — quotes, samples, on-site consultations and partnership applications</li>
+  <li><a href="apply.html">Requests</a> — quote requests, sample requests, consultation / visit bookings and partnership applications</li>
 </ul>
 <p>If you have any questions, please leave a message on our <a href="contact.html">contact page</a>.</p>`
     }
@@ -66,41 +66,39 @@ window.GP_POSTS = [
     date: '2026-09-30',
     pinned: false,
     title: {
-      ko: '7대 산업생태계별 V-ZERO 파트너를 모집합니다',
-      en: 'Now recruiting V-ZERO partners across seven industries'
+      ko: '7대 산업생태계별 파트너를 모십니다',
+      en: 'We welcome partners in seven industrial ecosystems'
     },
     summary: {
-      ko: '생활가전, 건설자재, 병원·의료, 모빌리티, 소재 코팅, 공공조달, 글로벌 B2B 분야에서 함께할 파트너를 찾습니다.',
-      en: 'We are looking for partners in home appliances, construction materials, healthcare, mobility, material coating, public procurement and global B2B.'
+      ko: '(주)그린파스처와 함께 비즈니스의 영토를 넓혀갈 7대 산업생태계별 파트너를 모십니다.',
+      en: 'We welcome partners in seven industrial ecosystems to expand the territory of business together with Green Pasture Co., Ltd.'
     },
     body: {
       ko: `
-<p>그린파스처는 V-ZERO 촉매 기술로 비즈니스의 영토를 함께 넓혀갈 <strong>산업별 파트너</strong>를 모십니다.</p>
+<p>(주)그린파스처와 함께 비즈니스의 영토를 넓혀갈 <strong>7대 산업생태계별 파트너</strong>를 모십니다.</p>
 <h3>모집 분야</h3>
 <ol>
-  <li><strong>생활가전</strong> — 공기청정기 · 에어컨 · 의류관리기 등의 필터와 내부 부품 적용</li>
-  <li><strong>건설자재</strong> — 벽지 · 바닥재 · 페인트 · 환기 시스템 등 마감재 적용</li>
-  <li><strong>병원 · 의료</strong> — 병동 · 수술실 · 요양시설 표면과 의료기기 표면 시공</li>
-  <li><strong>자동차 · 모빌리티</strong> — 공조 필터, 시트 · 핸들 등 다중이용 모빌리티 내장재</li>
-  <li><strong>섬유 · 플라스틱 · 목재 · 금속</strong> — 소재 코팅, 화장품 용기 · 뷰티 디바이스</li>
-  <li><strong>공공조달</strong> — 학교 · 지하철 · 관공서 등 공공시설 위생 관리</li>
-  <li><strong>글로벌 B2B 네트워크</strong> — 해외 대리점 · 에이전트</li>
+  <li><strong>생활 가전 (Home Appliances)</strong> — 공기청정기, 에어컨, 의류관리기 등 필수 생활가전의 필터 및 내부 팬</li>
+  <li><strong>건설 자재 (Construction Materials)</strong> — 벽지, 바닥재, 페인트, 환기 시스템(전열교환기) 등 건축 마감재</li>
+  <li><strong>병원 의료 (Medical &amp; Healthcare)</strong> — 음압병동, 수술실, 요양원 내부 벽면 및 의료기기 표면</li>
+  <li><strong>자동차 모빌리티 (Automotive Mobility)</strong> — 전기차 및 자율주행차의 공조 시스템 필터, 카셰어링 등 다중이용 모빌리티의 시트와 핸들</li>
+  <li><strong>섬유, 플라스틱, 목재, 금속류 코팅 (Textiles, Plastics, Wood &amp; Metals)</strong> — 화장품 용기 내부 코팅 및 뷰티 디바이스</li>
+  <li><strong>공공 조달 (Public Procurement)</strong> — 학교, 지하철, 관공서 등 공공 건축물의 미세먼지 및 바이러스 저감 사업</li>
+  <li><strong>BNI World Network 76 (Global B2B Network)</strong> — 국내외 76개국 네트워크의 각 분야(가전, 건설, 유통 등)</li>
 </ol>
-<p>대리점 · 시공점 · OEM 공급 등 협력 형태는 분야와 지역에 따라 협의합니다.</p>
 <p><a class="btn btn--primary" href="apply.html?type=partner">파트너 신청하기</a></p>`,
       en: `
-<p>Green Pasture is looking for <strong>industry partners</strong> to grow together with V-ZERO catalyst technology.</p>
+<p>We welcome <strong>partners in seven industrial ecosystems</strong> to expand the territory of business together with Green Pasture Co., Ltd.</p>
 <h3>Partnership areas</h3>
 <ol>
-  <li><strong>Home appliances</strong> — filters and internal parts of air purifiers, air conditioners and clothing care</li>
-  <li><strong>Construction materials</strong> — wallpaper, flooring, paint and ventilation systems</li>
-  <li><strong>Healthcare</strong> — surfaces in wards, operating rooms and care facilities, and medical device surfaces</li>
-  <li><strong>Automotive &amp; mobility</strong> — HVAC filters, seats and steering wheels in shared mobility</li>
-  <li><strong>Textiles, plastics, wood &amp; metals</strong> — material coating, cosmetic containers and beauty devices</li>
-  <li><strong>Public procurement</strong> — hygiene management for schools, subways and public buildings</li>
-  <li><strong>Global B2B network</strong> — overseas distributors and agents</li>
+  <li><strong>Home Appliances</strong> — filters and internal fans of essential home appliances such as air purifiers, air conditioners and clothing care machines</li>
+  <li><strong>Construction Materials</strong> — building finishing materials such as wallpaper, flooring, paint and ventilation systems (heat recovery ventilators)</li>
+  <li><strong>Medical &amp; Healthcare</strong> — interior walls of negative-pressure wards, operating rooms and nursing homes, and medical device surfaces</li>
+  <li><strong>Automotive Mobility</strong> — air-conditioning system filters of electric and autonomous vehicles, and seats and steering wheels of shared mobility such as car sharing</li>
+  <li><strong>Textiles, Plastics, Wood &amp; Metals</strong> — interior coating of cosmetic containers and beauty devices</li>
+  <li><strong>Public Procurement</strong> — fine dust and virus reduction projects for public buildings such as schools, subways and government offices</li>
+  <li><strong>BNI World Network 76 (Global B2B Network)</strong> — each field (appliances, construction, distribution, etc.) of the network across 76 countries in Korea and abroad</li>
 </ol>
-<p>Distribution, applicator and OEM supply terms are discussed by sector and region.</p>
 <p><a class="btn btn--primary" href="apply.html?type=partner">Apply for partnership</a></p>`
     }
   },
@@ -119,34 +117,44 @@ window.GP_POSTS = [
     },
     body: {
       ko: `
-<p>V-ZERO 도입을 검토하시는 기업 · 기관 담당자분께 <strong>제품 카탈로그 & 시공 가이드</strong>를 제공합니다.</p>
+<p>V-ZERO 도입을 검토하시는 기업 · 기관 담당자분은 <strong>제품 카탈로그 & 시공 가이드</strong>를 자료 요청에서 신청하실 수 있습니다.</p>
 <h3>자료 구성</h3>
 <ul>
-  <li>제품 개요 및 핵심 사양</li>
-  <li>기술 원리 — 가시광 · 무광 · 열촉매 3중 활성산소(ROS) 메커니즘</li>
+  <li>제품 개요 및 핵심 스펙</li>
+  <li>기술 원리 — 가시광 · 무광 · 열촉매 3중 ROS</li>
   <li>무기 바인더 원천기술 (SNB 기술)</li>
-  <li>성능 실증 데이터 — 항균 · 항바이러스 · 탈취, ATP 오염도 측정</li>
-  <li>적용 분야별 활용 예시</li>
-  <li>시공 사전 준비, 공정 흐름, 기재별 시공 기준표</li>
-  <li>품질 확인 — 표면저항 측정 방법</li>
-  <li>보관 방법 · 주의사항 · FAQ, 시험 결과 및 관련 특허</li>
+  <li>성능 실증 데이터 — 항균 · 항바이러스 · 탈취</li>
+  <li>ATP 오염도 측정 — 투석시설 시공 사례</li>
+  <li>경쟁 제품 비교</li>
+  <li>적용 분야별 활용</li>
+  <li>시공 사전 준비 — 자재 · 도구 · 환경</li>
+  <li>시공 공정 흐름</li>
+  <li>STEP별 시공 절차 (상세)</li>
+  <li>기재별 시공 기준표</li>
+  <li>품질 확인 — 표면저항 측정</li>
+  <li>보관 방법 · 주의사항 · FAQ</li>
+  <li>안전성 인증 및 특허 포트폴리오</li>
 </ul>
-<p>자료는 요청하신 이메일로 보내드립니다. 시험성적서 원본이 필요하시면 요청 내용에 함께 적어 주십시오.</p>
 <p><a class="btn btn--primary" href="apply.html?type=catalog">자료 요청하기</a></p>`,
       en: `
-<p>For companies and institutions considering V-ZERO, we provide our <strong>Product Catalog &amp; Application Guide</strong>.</p>
+<p>Companies and institutions considering V-ZERO can apply for our <strong>Product Catalog &amp; Application Guide</strong> through the materials request.</p>
 <h3>Contents</h3>
 <ul>
   <li>Product overview and key specifications</li>
-  <li>Technology — visible-light, lightless and thermal catalysis (triple ROS mechanism)</li>
-  <li>Inorganic binder technology (SNB)</li>
-  <li>Test data — antibacterial, antiviral, deodorization and ATP contamination measurements</li>
-  <li>Application examples by sector</li>
-  <li>Preparation, process flow and application standards by substrate</li>
+  <li>Technology — visible-light, lightless and thermal catalysis: triple ROS</li>
+  <li>Inorganic binder core technology (SNB technology)</li>
+  <li>Performance data — antibacterial, antiviral, deodorization</li>
+  <li>ATP contamination measurement — dialysis facility application case</li>
+  <li>Competitive product comparison</li>
+  <li>Applications by field</li>
+  <li>Pre-application preparation — materials, tools, environment</li>
+  <li>Application process flow</li>
+  <li>Step-by-step application procedure (detailed)</li>
+  <li>Application standards by substrate</li>
   <li>Quality check — surface resistance measurement</li>
-  <li>Storage, precautions, FAQ, test results and related patents</li>
+  <li>Storage, precautions and FAQ</li>
+  <li>Safety certifications and patent portfolio</li>
 </ul>
-<p>We will send the materials to your e-mail. If you need original test reports, please mention it in your request.</p>
 <p><a class="btn btn--primary" href="apply.html?type=catalog">Request materials</a></p>`
     }
   },
@@ -156,35 +164,35 @@ window.GP_POSTS = [
     date: '2026-09-30',
     pinned: false,
     title: {
-      ko: '빛이 없어도 작동하는 이유 — V-ZERO 3중 촉매 원리',
-      en: 'Why V-ZERO keeps working in the dark — the triple catalyst'
+      ko: 'V-ZERO 기술 원리 — 가시광 · 무광 · 열촉매 3중 ROS 활성 메커니즘',
+      en: 'V-ZERO technology — the visible-light, lightless and thermal catalyst triple ROS activation mechanism'
     },
     summary: {
-      ko: '자외선에서만 작동하던 기존 광촉매와 달리, V-ZERO는 실내조명 · 암소 · 열의 세 경로로 작동하도록 설계되었습니다.',
-      en: 'Unlike conventional UV-only photocatalysts, V-ZERO is designed to work through indoor light, darkness and heat.'
+      ko: '기존 광촉매는 자외선(UV) 전용이나 V-ZERO는 가시광 · 무광 · 열 3중 경로로 실내 조명(500lux)에서도 작동합니다.',
+      en: 'Conventional photocatalysts work only under ultraviolet (UV) light, but V-ZERO works through three pathways — visible light, lightless and thermal — even under indoor lighting (500 lux).'
     },
     body: {
       ko: `
-<p>기존 광촉매는 주로 <strong>자외선(UV)</strong>이 있어야 작동했습니다. 실내조명 아래나 밤에는 효과를 기대하기 어려웠던 이유입니다.</p>
-<p>V-ZERO는 여러 촉매를 조합해 <strong>세 가지 경로</strong>로 작동하도록 설계되었습니다.</p>
+<p>기존 광촉매는 <strong>자외선 전용</strong>으로, 실내 조명(형광등/LED) 하에서는 작동 불가합니다.</p>
+<p>V-ZERO는 <strong>3중 경로</strong>가 동시 작동합니다.</p>
 <ol>
-  <li><strong>가시광 촉매</strong> — 일반 실내조명(약 500lux) 수준의 빛으로 활성산소(ROS)를 만듭니다.</li>
-  <li><strong>무광 촉매(암촉매)</strong> — 무광 촉매가 빛이 없는 환경에서도 공기 중 산소 · 수분과 반응하도록 설계되었습니다.</li>
-  <li><strong>열촉매</strong> — 온도 조건에 따라 일산화탄소 등 유해가스의 산화 반응을 돕습니다.</li>
+  <li><strong>가시광(실내 500lux)</strong> — 실내 조명만으로 강력한 촉매 활성화.</li>
+  <li><strong>무광 · 암촉매(암소 24h)</strong> — 빛 에너지가 전혀 없는 암소 환경에서도 공기 중의 산소(O₂) 및 수분과 직접 상호작용하여 슈퍼옥사이드 라디칼을 지속적으로 생성합니다.</li>
+  <li><strong>열촉매</strong> — 온도와 시간의 상승에 따라 CO(일산화탄소) 분해 능력이 향상됨(CO 분해 시험, 시료 PTVTUA 성능향상품).</li>
 </ol>
-<p>이렇게 만들어진 활성산소는 표면에 닿은 세균 · 바이러스 · 냄새 분자를 산화 분해하는 방식으로 작용합니다.</p>
-<p class="tiny">※ 제조사 기술 자료를 요약한 내용이며, 실제 효과는 사용 환경(조도 · 온도 · 습도 · 오염도)에 따라 다를 수 있습니다.</p>
+<p>V-ZERO는 유해 물질이 촉매 표면에 접촉하는 즉시 분자 구조를 완전히 파괴하여 무력화(ZERO)시킵니다.</p>
+<p class="tiny">※ 실제 효과는 사용 환경(조도 · 온도 · 습도 · 오염도)에 따라 다를 수 있습니다.</p>
 <p><a class="btn btn--primary" href="business.html#technology">기술 자세히 보기</a></p>`,
       en: `
-<p>Conventional photocatalysts mainly require <strong>ultraviolet (UV) light</strong>, which is why they work poorly under indoor lighting or at night.</p>
-<p>V-ZERO combines several catalysts and is designed to work through <strong>three pathways</strong>.</p>
+<p>Conventional photocatalysts work <strong>only under ultraviolet light</strong> and cannot operate under indoor lighting (fluorescent/LED).</p>
+<p>V-ZERO works through <strong>three pathways</strong> simultaneously.</p>
 <ol>
-  <li><strong>Visible-light catalysis</strong> — generates reactive oxygen species (ROS) under ordinary indoor lighting (approx. 500 lux).</li>
-  <li><strong>Lightless (dark) catalysis</strong> — the lightless catalyst is designed to react with oxygen and moisture in the air even without light.</li>
-  <li><strong>Thermal catalysis</strong> — assists the oxidation of harmful gases such as carbon monoxide under suitable temperatures.</li>
+  <li><strong>Visible light (indoor 500 lux)</strong> — strong catalytic activation by indoor lighting alone.</li>
+  <li><strong>Lightless / dark catalysis (darkness, 24h)</strong> — even in darkness with no light energy at all, it interacts directly with oxygen (O₂) and moisture in the air to continuously generate superoxide radicals.</li>
+  <li><strong>Thermal catalysis</strong> — CO (carbon monoxide) decomposition capability improves as temperature and time increase (CO decomposition test, sample: PTVTUA improved-performance product).</li>
 </ol>
-<p>The resulting ROS act by oxidizing bacteria, viruses and odor molecules that come into contact with the surface.</p>
-<p class="tiny">* Summary of the manufacturer's technical materials. Actual performance may vary with the environment (light, temperature, humidity, contamination).</p>
+<p>V-ZERO completely destroys the molecular structure of harmful substances the moment they contact the catalyst surface, neutralizing them (ZERO).</p>
+<p class="tiny">* Actual performance may vary with the environment (light, temperature, humidity, contamination).</p>
 <p><a class="btn btn--primary" href="business.html#technology">Learn more about the technology</a></p>`
     }
   }

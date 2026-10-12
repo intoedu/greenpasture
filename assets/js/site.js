@@ -252,8 +252,8 @@ function buildFooter() {
     <div class="footer__brand">
       ${logoHtml()}
       <p class="footer__desc">
-        <span data-lang="ko">촉매 코팅 V-ZERO로 사람이 숨 쉬고 머무는 공간을 더 깨끗하게 가꾸어 갑니다.</span>
-        <span data-lang="en">With V-ZERO catalyst coating, we help keep the spaces where people live and breathe cleaner.</span>
+        <span data-lang="ko">인류가 숨 쉬고 머무는 모든 공간을 푸른 초장(Green Pasture)처럼 안전하고 깨끗하게 가꾸어 가겠습니다.</span>
+        <span data-lang="en">We will keep every space where humanity breathes and dwells safe and clean, like a green pasture.</span>
       </p>
       ${snsHtml()}
     </div>
@@ -282,7 +282,7 @@ function buildFooter() {
   <div class="wrap footer__bottom">
     <p class="footer__biz">
       <span data-lang="ko">${SITE.nameKo}</span><span data-lang="en">${SITE.nameEn}</span>
-      <span data-tbd="사업자등록증의 대표자는 송창근 1인입니다. 박건식 대표의 대표이사 등기 여부를 확인한 뒤 '공동대표' 표기를 정하세요."><span data-lang="ko">공동대표 ${SITE.ceoKo}</span><span data-lang="en">Co-CEOs ${SITE.ceoEn}</span></span>
+      <span data-tbd="사업자등록증 대표자: 송창근. 공동대표 등기 여부 확인 후 표기 확정"><span data-lang="ko">공동대표 ${SITE.ceoKo}</span><span data-lang="en">Co-CEOs ${SITE.ceoEn}</span></span>
       ${SITE.bizNo
         ? `<span><span data-lang="ko">사업자등록번호</span><span data-lang="en">Business Reg. No.</span> ${SITE.bizNo}</span>`
         : `<span class="tbd-only" data-tbd="사업자등록번호를 받으면 site.js 의 SITE.bizNo 에 입력하세요.">사업자등록번호 (확인 후 기재)</span>`}
