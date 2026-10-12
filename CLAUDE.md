@@ -7,7 +7,8 @@
 - **사실을 만들어 넣지 않는다.** 숫자 · 연혁 · 거래처 · 인증 · 수상은 고객 자료에 있는 것만 쓴다. 자료가 없으면 비워 두고 `data-tbd` 로 표시한다.
 - **비즈니스 트랙**: 문구에 종교적 표현을 넣지 않는다. ('푸른 초장(Green Pasture)'은 고객 리플릿의 사명 문구 그대로다.)
 - **'나노' · 성분 표기 금지** (2026-10-01 대표님 요청): 화면 문구 · 이미지 설명 · 검색용 정보 어디에도 '나노 / nano' 와 성분명(산화텅스텐 · 백금 · 실리카 등) · 입자 크기를 쓰지 않는다. 두께는 '머리카락 굵기의 약 1/1,000'. 필터 제품은 '해외용'으로 표기.
-- **광고 표현**: 항균 · 항바이러스 코팅제이므로 '무독성 · 무해 · 친환경 · 안전한 · 100% · 완벽 · 유일 · 감염 예방' 같은 단정 표현을 쓰지 않는다. 성능 수치는 **조건 · 출처 · 면책 문구**와 함께 쓴다. 비교 광고(타 방식 · 타사 비교)를 넣지 않는다. (근거: `docs/고객-확인사항.md` A 항목)
+- **고객 원문 우선** (2026-10-12 결정): 고객 자료(리플릿 · 카탈로그 · 시험 보고서 · 인사말)의 문구 · 수치를 그대로 쓴다. 제작사가 임의로 바꿔 쓰거나 순화하거나, 자료에 없는 사실 · 주장 · 약속(파트너 형태, 회신 기한 등)을 덧붙이지 않는다. 영문은 국문 원문을 충실히 옮긴다. 원문에 대한 의견 · 위험 판단은 고객에게 따로 전달하고 이 저장소에는 남기지 않는다.
+- **내부 문서 금지**: 이 저장소는 공개다. 위험 목록 · 고객 확인 기록 · 카톡 원문 · 개인 연락처 같은 내부 자료를 저장소(코드 주석 포함)에 두지 않는다.
 - **한/영 병기**: 본문은 `<span data-lang="ko">…</span><span data-lang="en">…</span>` 쌍으로 쓴다. 한쪽만 고치지 않는다. 속성은 `data-ko-placeholder|label|alt|title` / `data-en-…`, 선택 목록은 `<option value="한국어값" data-ko="…" data-en="…">`.
 - **서버 · 데이터베이스 · 빌드 도구를 들이지 않는다.** (Supabase · Vercel 은 쓰지 않기로 결정) 메모장으로도 고칠 수 있어야 한다.
 - 글꼴은 저장소 안의 Pretendard(`assets/fonts/pretendard/`)만 쓴다. 외부 CDN 글꼴을 다시 넣지 않는다.
@@ -20,15 +21,15 @@
 | 메뉴 | `assets/js/site.js` `NAV_ITEMS` |
 | 공지 · 소식 글 | `assets/data/posts.js` 배열 맨 위에 추가 |
 | 색상 · 여백 · 글자 크기 | `assets/css/style.css` 맨 위 `:root` |
-| 신청서 전송 방식 (구글 시트 / Web3Forms / 메일 앱) | `assets/js/config.js` — 설정법 `docs/이메일-접수-설정.md` |
+| 신청서 전송 방식 (구글 시트 / Web3Forms / 메일 앱) | `assets/js/config.js` — 지금은 메일 앱(고객 메일로 직접 전송). 다른 방식으로 바꿀 때는 **고객 명의 계정으로만** 연결한다(제작사 계정 금지) |
 | 구글 시트 수신 스크립트 | `tools/apps-script/Code.gs` |
-| 이미지 슬롯 · 규격 | `docs/자료-교체-가이드.md` |
+| 이미지 만들기 | `tools/images.py` (사진 `photo` · 인물 `square` · 로고 `keyout` → `icons` · 서류 `document`), 공유 이미지 `tools/make-og.js` |
 
 ## 새 자료가 왔을 때
-`docs/자료-교체-가이드.md` 의 해당 항목 절차를 따른다. 요약:
+절차:
 1. `tools/images.py` 로 웹용 파일을 만든다 (사진 `photo`, 인물 `square`, 로고 `keyout` → `icons`).
 2. 로고를 바꾸면 `python3 tools/images.py icons` 와 `node tools/make-og.js` 로 파비콘 · 공유 이미지를 다시 만든다.
-3. 확인이 끝난 항목은 `data-tbd` 속성과 `tbd-only` 클래스를 지우고, `docs/고객-확인사항.md` 체크박스를 갱신한다.
+3. 확인이 끝난 항목은 `data-tbd` 속성과 `tbd-only` 클래스를 지운다.
 4. CSS · JS 를 고쳤으면 모든 HTML 의 `?v=` 번호를 올린다 (브라우저 캐시 갱신).
 
 ## 검토 모드
@@ -44,4 +45,4 @@
 
 ## 배포
 `main` 에 합치면 `.github/workflows/deploy-pages.yml` 이 공개 파일만 모아 GitHub Pages 로 배포한다.
-저장소 Settings → Pages → Source 는 **GitHub Actions** 여야 한다. 도메인 연결은 README 7장.
+저장소 Settings → Pages → Source 는 **GitHub Actions** 다(2026-10-12 변경). 고객 도메인 연결은 고객 DNS 에 GitHub Pages 레코드를 추가해야 한다.
