@@ -63,7 +63,7 @@ const NAV_ITEMS = [
       { href: 'about.html#message',       ko: '대표 인사말',     en: 'CEO Message' },
       { href: 'about.html#leadership',    ko: '경영진',         en: 'Leadership' },
       { href: 'about.html#overview',      ko: '회사 개요',       en: 'Company Overview' },
-      { href: 'about.html#certification', ko: '인증 · 특허',     en: 'Certifications' },
+      { href: 'about.html#certification', ko: '시험 · 특허',     en: 'Tests & Patents' },
       { href: 'about.html#location',      ko: '오시는 길',       en: 'Location' }
     ]
   },
