@@ -66,16 +66,16 @@ window.GP_POSTS = [
     date: '2026-09-30',
     pinned: false,
     title: {
-      ko: '7대 산업생태계별 파트너를 모십니다',
-      en: 'We welcome partners in seven industrial ecosystems'
+      ko: '산업생태계별 파트너를 모십니다',
+      en: 'We welcome partners in industrial ecosystems'
     },
     summary: {
-      ko: '(주)그린파스처와 함께 비즈니스의 영토를 넓혀갈 7대 산업생태계별 파트너를 모십니다.',
-      en: 'We welcome partners in seven industrial ecosystems to expand the territory of business together with Green Pasture Co., Ltd.'
+      ko: '(주)그린파스처와 함께 비즈니스의 영토를 넓혀갈 산업생태계별 파트너를 모십니다.',
+      en: 'We welcome partners in industrial ecosystems to expand the territory of business together with Green Pasture Co., Ltd.'
     },
     body: {
       ko: `
-<p>(주)그린파스처와 함께 비즈니스의 영토를 넓혀갈 <strong>7대 산업생태계별 파트너</strong>를 모십니다.</p>
+<p>(주)그린파스처와 함께 비즈니스의 영토를 넓혀갈 <strong>산업생태계별 파트너</strong>를 모십니다.</p>
 <h3>모집 분야</h3>
 <ol>
   <li><strong>생활 가전 (Home Appliances)</strong> — 공기청정기, 에어컨, 의류관리기 등 필수 생활가전의 필터 및 내부 팬</li>
@@ -84,11 +84,10 @@ window.GP_POSTS = [
   <li><strong>자동차 모빌리티 (Automotive Mobility)</strong> — 전기차 및 자율주행차의 공조 시스템 필터, 카셰어링 등 다중이용 모빌리티의 시트와 핸들</li>
   <li><strong>섬유, 플라스틱, 목재, 금속류 코팅 (Textiles, Plastics, Wood &amp; Metals)</strong> — 화장품 용기 내부 코팅 및 뷰티 디바이스</li>
   <li><strong>공공 조달 (Public Procurement)</strong> — 학교, 지하철, 관공서 등 공공 건축물의 미세먼지 및 바이러스 저감 사업</li>
-  <li><strong>Global B2B Network</strong> — 국내외 76개국 네트워크의 각 분야(가전, 건설, 유통 등)</li>
 </ol>
 <p><a class="btn btn--primary" href="apply.html?type=partner">파트너 신청하기</a></p>`,
       en: `
-<p>We welcome <strong>partners in seven industrial ecosystems</strong> to expand the territory of business together with Green Pasture Co., Ltd.</p>
+<p>We welcome <strong>partners in industrial ecosystems</strong> to expand the territory of business together with Green Pasture Co., Ltd.</p>
 <h3>Partnership areas</h3>
 <ol>
   <li><strong>Home Appliances</strong> — filters and internal fans of essential home appliances such as air purifiers, air conditioners and clothing care machines</li>
@@ -97,7 +96,6 @@ window.GP_POSTS = [
   <li><strong>Automotive Mobility</strong> — air-conditioning system filters of electric and autonomous vehicles, and seats and steering wheels of shared mobility such as car sharing</li>
   <li><strong>Textiles, Plastics, Wood &amp; Metals</strong> — interior coating of cosmetic containers and beauty devices</li>
   <li><strong>Public Procurement</strong> — fine dust and virus reduction projects for public buildings such as schools, subways and government offices</li>
-  <li><strong>Global B2B Network</strong> — each field (appliances, construction, distribution, etc.) of the network across 76 countries in Korea and abroad</li>
 </ol>
 <p><a class="btn btn--primary" href="apply.html?type=partner">Apply for partnership</a></p>`
     }
