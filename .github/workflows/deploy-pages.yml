@@ -18,11 +18,9 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  # 1단계: 공개할 파일만 모아 올리기
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: 소스 내려받기
         uses: actions/checkout@v4
@@ -61,6 +59,14 @@ jobs:
         with:
           path: _site
 
+  # 2단계: 올린 파일을 GitHub Pages 에 배포 (1단계가 끝난 뒤에 실행)
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: 배포
         id: deployment
         uses: actions/deploy-pages@v4
