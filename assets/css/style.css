@@ -603,6 +603,7 @@ html[lang="en"] [data-lang="ko"] { display: none !important; }
 .apps--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .apps--4 .app__body { padding: 20px 22px 22px; }
 .apps--4 .app__body h3 { font-size: 17px; }
+.apps--4 > .app--text { grid-column: span 2; }  /* 메인 적용 분야: 타일 6개 + 파트너 카드 = 두 줄 */
 .app--text { background: linear-gradient(160deg, var(--night-800), var(--night-900)); border-color: transparent; color: #fff; }
 .app--text .app__body { padding: 30px; display: flex; flex-direction: column; height: 100%; }
 .app--text .app__no { color: var(--cyan-300); }
@@ -1449,10 +1450,6 @@ a.contact-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); b
 }
 
 @media (max-width: 720px) {
-  /* 사업 안내 07 카드: 인라인 3열 배치를 휴대폰에서 1열로 */
-  .app--text > .app__body[style] { grid-template-columns: 1fr !important; gap: 14px !important; }
-  .app--text > .app__body[style] > .app__no { font-size: 28px !important; }
-  .app--text > .app__body[style] > .btn { justify-self: start; }
   .registration__list > div { grid-template-columns: 1fr; gap: 2px; }
   :root { --gutter: 18px; }
   body { font-size: 15.5px; }
